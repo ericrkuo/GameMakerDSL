@@ -71,5 +71,5 @@ do every 2000 ms
     speed: 2
     radius: 3
     at y=4
-    if stage=2
+    if stage>=2
 ```
