@@ -5,17 +5,17 @@ Game: Stage1
 
 For i from 1 to 3
   Stage: 
-Name: Stage{i}
-Length: 60
-  Speed: 10 * i
-  NextStage: Stage{i+1} if i < 3 else None
-	
+    Name: Stage{i}
+    Length: 60
+      Speed: 10 * i
+      NextStage: Stage{i+1} if i < 3 else None
 
 Obstacle:
   Height: 5
   Location:
     Stage: Stage1
     Coordinate: (10, 10)
+
 Condition:
   IF:
     Action: Pass
