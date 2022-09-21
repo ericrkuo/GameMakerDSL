@@ -83,11 +83,19 @@ create a game
   called MyGame
   of height 20 and length 60
 
-// Feature 1: Loop to define multiple levels
-create stage for i from 1 to 3
-  name: Stage{i}
-  // speed increases with each level
-  speed: i
+// Feature 1: nested stages
+create stage 1 with speed 2
+
+create stage 2
+  with speed 1
+  with parent stage 1
+  at x=2 and y=10
+  score * 2
+
+create stage 3
+  with parent stage 2
+  at x=100 and y=4
+  score + 500
 
 // wall obstacles
 create a wall

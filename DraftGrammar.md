@@ -5,7 +5,11 @@ program : game stages (obstacle)* (loop)* ;
 
 game : 'create a game called' TEXT dimension ;
 
-stages : TODO nested stages? ;
+stages : stage  nestedStage* ;
+stage: 'create a stage' NUM speed? ;
+nestedStage: stage parent coordinate score ;
+parent: 'with parent stage' NUM ;
+score: 'score' OP NUM ;
 
 // obstacles
 obstacle : wall | fireball ;
@@ -29,4 +33,5 @@ XPOS : NUMBER ;
 YPOS : 'RANDOM' | NUMBER '
 TEXT : [a-zA-Z]+ ;
 NUMBER: [0-9]+ ;
+OP: '+' | '-' | '*' | '/';
 ```
