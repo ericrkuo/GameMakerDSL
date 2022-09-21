@@ -84,10 +84,11 @@ create a game
   of height 20 and length 60
 
 // Feature 1: nested stages
-create stage 1 with speed 2
+create stage 1
+  with speed 2
 
 create stage 2
-  with speed 1
+  with speed 3
   with parent stage 1
   at x=2 and y=10
   score * 2
