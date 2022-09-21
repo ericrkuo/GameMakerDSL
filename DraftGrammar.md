@@ -24,7 +24,7 @@ coordinate : 'at x=' XPOS 'and y=' YPOS | 'at y=' YPOS ;
 speed: 'with speed' NUMBER ;
 
 // other tokens
-COMPARATOR : 'LT' | 'GT' | 'EQ' ;
+COMPARATOR: '>' | '<' | '=' ;
 XPOS : NUMBER ;
 YPOS : 'RANDOM' | NUMBER '
 TEXT : [a-zA-Z]+ ;

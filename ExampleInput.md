@@ -98,12 +98,12 @@ create a wall
 create a wall
   of height 1 and length 3
   at x=0 and y=RANDOM
-  if stage EQ 2
+  if stage=2
 
 // Feature 3: Loops for objects
 do every 2000 ms
   create a fireball
     at y=4
     with speed 2
-    if stage GT 2
+    if stage>2
 ```
