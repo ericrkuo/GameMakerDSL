@@ -73,3 +73,37 @@ do every 2000 ms
     at y=4
     if stage>=2
 ```
+
+## Version 3
+Main changes
+- Make the DSL even simpler
+
+```js
+create a game
+  called MyGame
+  of height 20 and length 60
+
+// Feature 1: Loop to define multiple levels
+create stage for i from 1 to 3
+  name: Stage{i}
+  // speed increases with each level
+  speed: i
+
+// wall obstacles
+create a wall
+  of height 5 and length 1
+  at x=3 and y=10
+
+// Feature 2: Object creation dependent upon some condition
+create a wall
+  of height 1 and length 3
+  at x=0 and y=RANDOM
+  if stage EQ 2
+
+// Feature 3: Loops for objects
+do every 2000 ms
+  create a fireball
+    at y=4
+    with speed 2
+    if stage GT 2
+```
