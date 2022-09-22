@@ -122,64 +122,72 @@ Main changes
 - Polish definition of stages and levels (more similar to substages in mario)
 - Array-like declaration of walls
 
-// TODO modify example grammar
-
 ```js
+/**
+ * Creation of a game
+*/
 create a game
   called MyGame
-  of height 20 and length 60
-  // TODO define a goal
-  finish at level 4
-  // TODO scoring - should indicate by distance
+  of height 50 and length 200
+  reward 50 for each distance
 
-// Feature 1: nested stages
-// TODO what happens if miss the stage
+/**
+ * Feature 1: Levels and nested stages
+ * - Each level can have mini levels called substages. This is similar to Super Mario Bros where the Mario can enter into another substage through the green pipe
+ * - Substages can be more challenging, and thus can reward with score multipliers 
+ * - If a substage is not entered, the character moves to the end of the level and onto the next level
+ * - When a character reaches the end of a substage, they return back to where they were in the level
+*/
 create level 1
   with speed 2
-  if hit x=2 and y=10
-    go to substage A
-  if hit x=100 and y=50
-    go to substage B
+  if hit (2,10)  go to substage 1
+  if hit (50,25) go to substage 2
 
-  // TODO clarify grammar to make it distinct between stage and substage
-  create substage A
+  create substage 1
     with speed 3
-    exit at x=2 and y=10
-    score * 2 // double points
+    score * 2
 
-  create substage B
-    at x=100 and y=4
+  create substage 2
+    with speed 4
     score + 500
 
 create level 2
   with speed 2
-  if hit x=2 and y=10
-    go to substage A // TODO substages with the same name but different level
+  if hit (20,20) go to substage 1
 
-  create substage A
+  create substage 1
     with speed 3
-    exit at x=2 and y=10
-    score * 2 // double points
+    score * 3
 
-// wall obstacles
-create a wall
+/**
+ * Obstacle: walls
+ * - walls of varying dimensions can be placed in levels and substages
+ * - walls can be reused across levels and substages
+*/
+create walls
   of height 5 and length 1
-  at x=3 and y=10
+  at (3,10)
 
-// Feature 2: Object creation dependent upon some condition
+/**
+ * Feature 2: Object creation dependent upon some condition
+ * - Walls can be reused across future levels or stages to make them more difficult
+ * - Walls can be applied to specific substages or levels
+*/
 create walls
   of height 1 and length 3
-  at (0, RANDOM), (10, 10), (20, 30)
-  // TODO think about if condition for level or stage
-  if level > 2
-  if substage > 1 // idea: can reuse this to make future stages harder
+  at (0, 20), (10, 10), (20, 30)
+  if level = 1
+  if substage > 0
 
-  // TODO can consider AND/OR conditions
-
-// Feature 3: Loops for fireballs
+/**
+ * Feature 3: Loops for fireballs
+ * - Fireballs come from the right side of the screen, move left, and disappear once they exit the screen
+ * - Fireballs take precedence over walls
+ * - Loops can be defined to reuse fireballs
+*/
 do every 2000 ms
-  create a fireball
+  create fireball
     at y=4
     with speed 2
-    if stage>2
+    if stage > 2
 ```

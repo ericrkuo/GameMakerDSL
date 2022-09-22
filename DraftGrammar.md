@@ -31,7 +31,7 @@ speed: 'with speed' NUMBER ;
 // other tokens
 COMPARATOR: '>' | '<' | '=' ;
 XPOS : NUMBER ;
-YPOS : 'RANDOM' | NUMBER '
+YPOS : NUMBER ;
 TEXT : [a-zA-Z]+ ;
 NUMBER: [0-9]+ ;
 OP: '+' | '-' | '*' | '/';
