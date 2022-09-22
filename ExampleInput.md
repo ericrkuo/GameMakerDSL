@@ -122,6 +122,8 @@ Main changes
 - Polish definition of stages and levels (more similar to substages in mario)
 - Array-like declaration of walls
 
+// TODO modify example grammar
+
 ```js
 create a game
   called MyGame
