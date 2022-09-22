@@ -116,3 +116,68 @@ do every 2000 ms
     with speed 2
     if stage>2
 ```
+
+## Version 4
+Main changes
+- Polish definition of stages and levels (more similar to substages in mario)
+- Array-like declaration of walls
+
+```js
+create a game
+  called MyGame
+  of height 20 and length 60
+  // TODO define a goal
+  finish at level 4
+  // TODO scoring - should indicate by distance
+
+// Feature 1: nested stages
+// TODO what happens if miss the stage
+create level 1
+  with speed 2
+  if hit x=2 and y=10
+    go to substage A
+  if hit x=100 and y=50
+    go to substage B
+
+  // TODO clarify grammar to make it distinct between stage and substage
+  create substage A
+    with speed 3
+    exit at x=2 and y=10
+    score * 2 // double points
+
+  create substage B
+    at x=100 and y=4
+    score + 500
+
+create level 2
+  with speed 2
+  if hit x=2 and y=10
+    go to substage A // TODO substages with the same name but different level
+
+  create substage A
+    with speed 3
+    exit at x=2 and y=10
+    score * 2 // double points
+
+// wall obstacles
+create a wall
+  of height 5 and length 1
+  at x=3 and y=10
+
+// Feature 2: Object creation dependent upon some condition
+create walls
+  of height 1 and length 3
+  at (0, RANDOM), (10, 10), (20, 30)
+  // TODO think about if condition for level or stage
+  if level > 2
+  if substage > 1 // idea: can reuse this to make future stages harder
+
+  // TODO can consider AND/OR conditions
+
+// Feature 3: Loops for fireballs
+do every 2000 ms
+  create a fireball
+    at y=4
+    with speed 2
+    if stage>2
+```
