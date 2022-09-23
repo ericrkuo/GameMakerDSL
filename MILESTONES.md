@@ -60,7 +60,7 @@ Matrix
 - Example input: 
 [Here's](https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/blob/758cb12bb7921a6a2c5d3084e4ab0b060e51334e/ExampleInput.md#version-4) what an example input by our user would look like
 
-## Plan divison of main responsibilties between team members & Time Line
+## Plan divison of main responsibilties between team members & timeline
 - [Link](https://docs.google.com/document/d/1sPjLjNMnLESEZp0rIRhdijkrM3di5Ryl8ud1PNJVrLE/edit#bookmark=id.o6jjuopxhx01)
 
 ## Draft grammer
@@ -69,19 +69,20 @@ Matrix
 ## Summary of progress so far
 - Defined tasks, assigned team members, and set deadlines
 - Drafted several implementations of example user input
-- Created a draft grammar
+- Created a draft grammar - https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/pull/2
 - Boostrapped repo - https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/pull/3 
 
 ## Notes of any important changes/feedback from TA discussion
 
 Jifeng provided us with the following feedback based on our example inputs we had:
 
-- Currently, our progress looks really well.Furthermore, our time schedule is very good. Hes told us to keep up the good work.
+- Currently, our progress looks really well. Furthermore, our time schedule is very good. He told us to keep up the good work.
 - We already have the enough features to satisfy the requirements but feel free to add extra after we have done the core implementations.
+- To prioritize formalizing our grammar and conducting user studies next week.
 
 ## Any planned follow-up tasks
 - Formalize our grammer
 - Work on Lexer and Parser
-- Do user research / study
+- Conduct user studies and reiterate on our grammar based on feedback
 - AST Design
 - Concurrent work on UI for game platform
