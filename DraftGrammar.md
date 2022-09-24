@@ -36,7 +36,7 @@ speed: 'with speed' NUMBER ;
 
 // other tokens
 COMPARATOR: '>' | '<' | '=' ;
-TEXT : [a-zA-Z]+ ;
+TEXT : [a-zA-Z0-9]+ ;
 NUMBER: [0-9]+ ;
 OP: '+' | '-' | '*' | '/';
 ```
