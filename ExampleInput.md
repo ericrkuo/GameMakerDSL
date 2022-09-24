@@ -129,7 +129,7 @@ Main changes
 create a game
   called MyGame
   of height 50 and length 200
-  reward 50 for each distance
+  reward 50 every 5 units traveled
 
 /**
  * Feature 1: Levels and nested stages
@@ -189,5 +189,5 @@ do every 2000 ms
   create fireball
     at y=4
     with speed 2
-    if stage > 2
+    if level > 2
 ```

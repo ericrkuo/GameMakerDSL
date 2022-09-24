@@ -1,37 +1,41 @@
 # Draft Grammar
 
 ```js
-program : game stages (obstacle)* (loop)* ;
+program : game (level)+ (obstacle)* (loop)* ;
 
-game : 'create a game called' TEXT dimension ;
+game : 'create a game called' TEXT dimension reward ;
 
-// stages
-stages : stage nestedStage* ;
-stage: 'create stage' NUM speed? ;
-nestedStage: stage parent coordinate score ;
-parent: 'with parent stage' NUM ;
-score: 'score' OP NUM ;
+// levels & substages
+level : 'create level' NUM speed? (substageCondition)* (substage)* ;
+substageCondition : 'if hit' coordinate 'go to substage' NUM ;
+substage : 'create substage' NUM speed? score? ;
 
 // obstacles
 obstacle : wall | fireball ;
 
-wall : 'create a wall' dimension coordinate condition? ;
+wall : 'create walls' 
+    dimension
+    'at' (coordinate (',' coordinate)*)
+    condition? ;
 
-fireball : 'create a fireball' coordinate speed? condition? ;
+fireball : 'create fireball' y_coordinate speed? condition? ;
 
 // control flow
-condition: 'if stage' COMPARATOR NUMBER;
+condition: levelCondition substageCondition? ;
+levelCondition : 'if level' COMPARATOR NUMBER ;
+substageCondition : 'if substage' COMPARATOR NUMBER ;
 loop: 'do every' NUMBER 'ms' fireball;
 
-// obstacle configurations
+// obstacle/game configurations
 dimension : 'of height' NUMBER 'and length' NUMBER ;
-coordinate : 'at x=' XPOS 'and y=' YPOS | 'at y=' YPOS ;
+reward : 'reward' NUMBER 'every' NUMBER 'units traveled'
+score: 'score' OP NUM ;
+coordinate : '(' NUMBER ',' NUMBER ')';
+y_coordinate : 'at y=' NUMBER ;
 speed: 'with speed' NUMBER ;
 
 // other tokens
 COMPARATOR: '>' | '<' | '=' ;
-XPOS : NUMBER ;
-YPOS : NUMBER ;
 TEXT : [a-zA-Z]+ ;
 NUMBER: [0-9]+ ;
 OP: '+' | '-' | '*' | '/';
