@@ -6,8 +6,8 @@ program : game (level)+ (obstacle)* (loop)* ;
 game : 'create a game called' TEXT dimension reward ;
 
 // levels & substages
-level : 'create level' NUM speed? (substageCondition)* (substage)* ;
-substageCondition : 'if hit' coordinate 'go to substage' NUM ;
+level : 'create level' NUM speed? (substageLocation)* (substage)* ;
+substageLocation : 'if hit' coordinate 'go to substage' NUM ;
 substage : 'create substage' NUM speed? score? ;
 
 // obstacles
