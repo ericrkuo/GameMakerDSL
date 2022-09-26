@@ -1,7 +1,7 @@
 lexer grammar EndlessRunnerMakerLexer;
 
 // (DEFAULT MODE)
-GAME_START: 'create a game called' WS* -> mode(TEXT_MODE);
+GAME_START: 'create a game' WS* 'called' WS* -> mode(TEXT_MODE);
 DIMENSION_START: 'of height' WS* -> mode(NUM_MODE);
 DIMENSION_SEP: 'and length' WS* -> mode(NUM_MODE);
 REWARD_START: 'reward' WS* -> mode(NUM_MODE);
@@ -11,12 +11,12 @@ REWARD_END: 'units traveled';
 // level & staging
 LEVEL_START: 'create level' WS* -> mode(NUM_MODE);
 SPEED: 'with speed' WS* -> mode(NUM_MODE);
-SUBSTAGE_LOCATION_START: 'if hits' WS* -> mode(COORDINATE_MODE);
+SUBSTAGE_LOCATION_START: 'if hit' WS* -> mode(COORDINATE_MODE);
 SUBSTAGE_LOCATION_SEP: 'go to substage' WS* -> mode(NUM_MODE);
 SUBSTAGE_START: 'create substage' WS* -> mode(NUM_MODE);
 SCORE: 'score' WS* -> mode(NUM_MODE);
 
-// obstracles
+// obstacles
 WALL_START: 'create walls';
 WALL_SEP: 'at' WS* -> mode(COORDINATE_MODE);
 COORDINATES_SEP: ',' WS* -> mode(COORDINATE_MODE);

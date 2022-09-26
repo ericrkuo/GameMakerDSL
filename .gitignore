@@ -28,4 +28,8 @@ hs_err_pid*
 gen/*
 out/*
 *.iml
+/src/parser/gen/*
 
+# exclude
+!/.idea/Project1Group12.iml
+!/lib/antlr-4.10.1-complete.jar
