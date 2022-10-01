@@ -199,7 +199,6 @@ Main changes
 /**
  * Creation of a game
 */
-// TODO change grammar, removed height, changed length to width
 create a game
   called MyGame
   of width 200
@@ -251,7 +250,6 @@ create walls 1
   of height 5 and width 1
   at (3,10)
 
-// TODO polish up this documentation and all other documentation
 /**
  * Feature 2: Object creation dependent upon some condition
  * - Walls can be reused across future levels or stages to make them more difficult
@@ -265,9 +263,8 @@ create walls 2
  * Feature 3: Loops for fireballs
  * - Fireballs come from the rightmost side of the screen/frame, move left, and disappear once they exit the screen
  * - Fireballs take precedence over walls
- * - Loops can be defined to reuse fireballs
+ * - Fireballs can be re-occurring or can be triggered once the character passes an x-coordinate
 */
-// TODO change grammar - units and loops changed
 create fireball 1
   trigger every 50 units
   at y=4
