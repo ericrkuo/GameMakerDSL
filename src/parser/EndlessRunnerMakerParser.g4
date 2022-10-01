@@ -1,32 +1,32 @@
 parser grammar EndlessRunnerMakerParser;
 options { tokenVocab=EndlessRunnerMakerLexer; }
 
-program: game (level)+ (obstacle)* (loop)* EOF ;
-game: GAME_START TEXT dimension reward ;
+program: game (level)+ (substage)* (obstacle)* EOF ;
+game: GAME_START TEXT widthDimension reward ;
+
+// game config
+dimension : DIMENSION_START NUM DIMENSION_SEP NUM ;
+widthDimension: WIDTH_DIMENSION NUM;
+reward: REWARD_START NUM REWARD_SEP NUM UNITS;
+speed: SPEED NUM;
+coordinate: LEFT_BRACE NUM COMMA RIGHT_BRACE;
+coordinates: (coordinate (COMMA coordinate)*);
+score: SCORE OP NUM;
+y_coordinate: Y_COORDINATE NUM;
+x_coordinate: X_COORDINATE TRIGGER_NUM;
 
 // level & staging
-level: LEVEL_START NUMBER speed? (substageLocation)* (substage)* ;
-substageLocation: SUBSTAGE_LOCATION_START coordinate SUBSTAGE_LOCATION_SEP NUMBER ;
-substage: SUBSTAGE_START NUMBER speed? score? ;
+level: LEVEL_START NUM speed? withWalls? withFireballs? (substageLocation)*;
+substage: SUBSTAGE_START NUM speed? withWalls? withFireballs? score? ;
+substageLocation : SUBSTAGE_LOCATION_START coordinate SUBSTAGE_LOCATION_SEP NUM;
+withWalls: WITH_WALL ids;
+withFireballs: WITH_FB ids;
+ids: (NUM (COMMA NUM)*);
 
 // obstacles
-obstacle: wall | fireball ;
-wall: WALL_START
-    dimension
-    WALL_SEP (coordinate (COORDINATES_SEP coordinate)*)
-    condition? ;
-fireball: FIREBALL_START y_coordinate speed? condition? ;
-
-// control flow
-condition: levelCondition substageCondition? ;
-levelCondition: LEVEL_CONDITION COMP NUMBER ;
-substageCondition: SUBSTAGE_CONDITION COMP NUMBER ;
-loop: LOOP NUMBER MS fireball ;
-
-// obstacle / game config
-dimension: DIMENSION_START NUMBER DIMENSION_SEP NUMBER ;
-reward: REWARD_START NUMBER REWARD_SEP NUMBER REWARD_END ;
-speed: SPEED NUMBER ;
-coordinate: COORDINATE_START COORDINATE_NUMBER COORDINATE_SEP COORDINATE_NUMBER COORDINATE_END ;
-score: SCORE OP NUMBER ;
-y_coordinate: Y_COORDINATE NUMBER ;
+obstacle: wall | fireball;
+wall: WALL_START NUM dimension WALL_SEP coordinates;
+fireball: FIREBALL_START NUM trigger y_coordinate speed?;
+trigger: loopTrigger | staticTrigger;
+loopTrigger: EVERY NUM UNITS;
+staticTrigger: TRIGGER x_coordinate;
