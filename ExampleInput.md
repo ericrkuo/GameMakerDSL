@@ -194,6 +194,7 @@ do every 2000 ms
 
 ## Version 5
 Main changes
+- feedback from user studies
 
 ```js
 /**
