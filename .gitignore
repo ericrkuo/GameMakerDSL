@@ -32,4 +32,4 @@ out/*
 
 # exclude
 !/.idea/Project1Group12.iml
-!/lib/antlr-4.10.1-complete.jar
+!/lib/*
