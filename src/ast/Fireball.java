@@ -8,15 +8,13 @@ public class Fireball extends Node {
     private final Integer id;
     private final Speed speed;
     private final Integer y_coordinate;
-    private final Integer x_coordinate;
-    private final Integer loopDistance;
+    private final Trigger trigger;
 
-    public Fireball(Integer id, Speed speed, Integer y_coordinate, Integer x_coordinate, Integer loopDistance) {
+    public Fireball(Integer id, Speed speed, Integer y_coordinate, Trigger trigger) {
         this.id = id;
         this.speed = speed;
         this.y_coordinate = y_coordinate;
-        this.x_coordinate = x_coordinate;
-        this.loopDistance = loopDistance;
+        this.trigger = trigger;
     }
 
     public Integer getId() {
@@ -31,11 +29,7 @@ public class Fireball extends Node {
         return y_coordinate;
     }
 
-    public Integer getX_coordinate() {
-        return x_coordinate;
-    }
-
-    public Integer getLoopDistance() {
-        return loopDistance;
+    public Trigger getTrigger() {
+        return trigger;
     }
 }

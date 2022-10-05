@@ -102,17 +102,26 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
     public Fireball visitFireball(GameParser.FireballContext ctx) {
         Integer id = Integer.parseInt(ctx.NUM().getText());
         Speed speed = (ctx.speed() != null) ? (Speed) ctx.speed().accept(this) : Speed.DEFAULT_SPEED;
-
         Integer y_coordinate = Integer.parseInt(ctx.y_coordinate().NUM().getText());
-        Integer x_coordinate = null, loopDistance = null;
 
+        Trigger trigger;
         if (ctx.trigger().loopTrigger() != null) {
-            loopDistance = Integer.parseInt(ctx.trigger().loopTrigger().NUM().getText());
-        } else if (ctx.trigger().staticTrigger() != null) {
-            x_coordinate = Integer.parseInt(ctx.trigger().staticTrigger().NUM().getText());
+            trigger = (Trigger) ctx.trigger().loopTrigger().accept(this);
+        } else {
+            trigger = (Trigger) ctx.trigger().staticTrigger().accept(this);
         }
 
-        return new Fireball(id, speed, y_coordinate, x_coordinate, loopDistance);
+        return new Fireball(id, speed, y_coordinate, trigger);
+    }
+
+    @Override
+    public Trigger visitLoopTrigger(GameParser.LoopTriggerContext ctx) {
+        return new Trigger(Integer.parseInt(ctx.NUM().getText()), TriggerFlavour.Loop);
+    }
+
+    @Override
+    public Trigger visitStaticTrigger(GameParser.StaticTriggerContext ctx) {
+        return new Trigger(Integer.parseInt(ctx.NUM().getText()), TriggerFlavour.Static);
     }
 
     @Override
