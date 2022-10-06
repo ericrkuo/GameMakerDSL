@@ -28,13 +28,14 @@ public class CollisionDetector implements CollisionVisitor<Bird, Boolean> {
     @Override
     public Boolean visit(Bird bird, Block b) {
         final int blockTop = b.y;
-        final int blockBottom = b.y;
-        final int birdTop = bird.y;
-        final int birdBottom = bird.y;
+        final int blockBottom = b.y + b.height;
         final int blockLeft = b.x;
         final int blockRight = b.x + b.width;
+
         final int birdLeft = bird.x;
         final int birdRight = bird.x + bird.width;
+        final int birdTop = bird.y;
+        final int birdBottom = bird.y + b.height;
         int v = (Math.min(blockBottom, birdBottom) - Math.max(blockTop, birdTop));
         int h = (Math.min(blockRight, birdRight) - Math.max(blockLeft, birdLeft));
         return v > 0 && h > 0;
