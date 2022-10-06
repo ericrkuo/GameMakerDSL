@@ -1,13 +1,13 @@
 package ui;
 
-import libs.Renderer;
+import ast.Wall;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    public static final int PIPE_DELAY = 100;
+
 
     private Boolean paused;
 
@@ -16,12 +16,13 @@ public class Game {
     private int pipeDelay;
 
     private Bird bird;
-    private ArrayList<Pipe> pipes;
+    private ArrayList<Wall> walls;
     private Keyboard keyboard;
 
     public int score;
     public Boolean gameover;
     public Boolean started;
+    public int speed;
 
     private List<Renderer> renderableList;
 
@@ -42,9 +43,12 @@ public class Game {
         pauseDelay = 0;
         restartDelay = 0;
         pipeDelay = 0;
+        speed = 3;
 
         bird = new Bird();
-        pipes = new ArrayList<Pipe>();
+        Wall wall1 = new Wall(200,0,2,3);
+        walls = new ArrayList<Wall>();
+        walls.add(wall1);
     }
 
     public void update() {
@@ -64,7 +68,7 @@ public class Game {
         if (gameover)
             return;
 
-        movePipes();
+        moveWalls();
         checkForCollisions();
     }
 
@@ -95,58 +99,18 @@ public class Game {
         }
     }
 
-    private void movePipes() {
-        pipeDelay--;
-
-        if (pipeDelay < 0) {
-            pipeDelay = PIPE_DELAY;
-            Pipe northPipe = null;
-            Pipe southPipe = null;
-
-            // Look for pipes off the screen
-            for (Pipe pipe : pipes) {
-                if (pipe.x - pipe.width < 0) {
-                    if (northPipe == null) {
-                        northPipe = pipe;
-                    } else if (southPipe == null) {
-                        southPipe = pipe;
-                        break;
-                    }
-                }
-            }
-
-            if (northPipe == null) {
-                Pipe pipe = new Pipe("north");
-                pipes.add(pipe);
-                northPipe = pipe;
-            } else {
-                northPipe.reset();
-            }
-
-            if (southPipe == null) {
-                Pipe pipe = new Pipe("south");
-                pipes.add(pipe);
-                southPipe = pipe;
-            } else {
-                southPipe.reset();
-            }
-
-            northPipe.y = southPipe.y + southPipe.height + 175;
-        }
-
-        for (Pipe pipe : pipes) {
-            pipe.update();
+    private void moveWalls() {
+        for(Wall wall: walls) {
+            wall.update(speed);
         }
     }
 
     private void checkForCollisions() {
 
-        for (Pipe pipe : pipes) {
-            if (pipe.collides(bird.x, bird.y, bird.width, bird.height)) {
+        for (Wall wall : walls) {
+            if (wall.collides(bird.x, bird.y, bird.width, bird.height)) {
                 gameover = true;
                 bird.dead = true;
-            } else if (pipe.x == bird.x && pipe.orientation.equalsIgnoreCase("south")) {
-                score++;
             }
         }
 
@@ -160,4 +124,3 @@ public class Game {
     public List<Renderer> getRenderableList() {
         return renderableList;
     }
-}
