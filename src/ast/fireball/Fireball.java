@@ -11,7 +11,7 @@ public abstract class Fireball extends Obstacle {
     public static final Image image = Util.loadImage("assets/fireball.png"); // need t
     @Override
     public <C, T> T accept(C context, CollisionVisitor<C, T> v) {
-        return null;
+        return v.visit(context, this);
     }
 
     public int getFireballSpeed() {
