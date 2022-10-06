@@ -1,9 +1,8 @@
 package ui;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.geom.*;
+import libs.Renderer;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -23,11 +22,12 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
 
         Graphics2D g2D = (Graphics2D) g;
-        for (Render r : game.getRenders())
+        for (Renderer r : game.getRenderableList()) {
             if (r.transform != null)
-                g2D.drawImage(r.image, r.transform, null);
+                g2D.drawImage(r.img, r.transform, null);
             else
-                g.drawImage(r.image, r.x, r.y, null);
+                g.drawImage(r.img, r.x, r.y, null);
+        }
 
 
         g2D.setColor(Color.BLACK);

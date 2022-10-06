@@ -1,9 +1,8 @@
 package ast;
 
-import libs.Renderable;
+import libs.Renderer;
+import ui.CollisionVisitor;
 
-public abstract class Obstacle implements Renderable {
-    private Integer posX;
-    private Integer posY;
-
+public abstract class Obstacle extends Renderer {
+    abstract public <C,T> T accept(C context, CollisionVisitor<C,T> v); // so that we remember to define this in all subclasses
 }

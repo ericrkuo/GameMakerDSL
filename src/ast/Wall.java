@@ -1,6 +1,8 @@
 package ast;
 
-public class Wall {
+import ui.CollisionVisitor;
+
+public class Wall extends Obstacle {
 
     private Integer height;
     private Integer length;
@@ -10,5 +12,10 @@ public class Wall {
 
     public Wall(Integer posX, Integer posY, Integer height, Integer length) {
 
+    }
+
+    @Override
+    public <C, T> T accept(C context, CollisionVisitor<C, T> v) {
+        return null;
     }
 }

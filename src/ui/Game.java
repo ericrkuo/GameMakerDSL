@@ -1,10 +1,12 @@
 package ui;
 
+import libs.Renderer;
+
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Game {
-
     public static final int PIPE_DELAY = 100;
 
     private Boolean paused;
@@ -21,8 +23,13 @@ public class Game {
     public Boolean gameover;
     public Boolean started;
 
+    private List<Renderer> renderableList;
+
     public Game() {
         keyboard = Keyboard.getInstance();
+        renderableList = new ArrayList<>();
+        renderableList.add(new StaticImage("assets/background.png"));
+        renderableList.add(new StaticImage("assets/foreground.png"));
         restart();
     }
 
@@ -59,16 +66,6 @@ public class Game {
 
         movePipes();
         checkForCollisions();
-    }
-
-    public ArrayList<Render> getRenders() {
-        ArrayList<Render> renders = new ArrayList<Render>();
-        renders.add(new Render(0, 0, "assets/background.png"));
-        for (Pipe pipe : pipes)
-            renders.add(pipe.getRender());
-        renders.add(new Render(0, 0, "assets/foreground.png"));
-        renders.add(bird.getRender());
-        return renders;
     }
 
     private void watchForStart() {
@@ -158,5 +155,9 @@ public class Game {
             gameover = true;
             bird.y = App.HEIGHT - 80 - bird.height;
         }
+    }
+
+    public List<Renderer> getRenderableList() {
+        return renderableList;
     }
 }

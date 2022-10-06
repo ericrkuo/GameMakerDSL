@@ -1,10 +1,11 @@
 package ui;
 
-import java.awt.Image;
+import libs.Renderer;
+
 import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
 
-public class Bird {
+public class Bird extends Renderer {
 
     public int x;
     public int y;
@@ -18,7 +19,6 @@ public class Bird {
 
     private double rotation;
 
-    private Image image;
     private Keyboard keyboard;
 
     public Bird() {
@@ -30,13 +30,10 @@ public class Bird {
         dead = false;
 
         keyboard = Keyboard.getInstance();
+        img = Util.loadImage("assets/bird.png");
     }
 
     public void update() {
-
-
-
-
         if (!dead && keyboard.isDown(KeyEvent.VK_UP)) {
             yvel = -10;
         }
@@ -46,17 +43,6 @@ public class Bird {
         }
 
         y += (int)yvel;
-    }
-
-    public Render getRender() {
-        Render r = new Render();
-        r.x = x;
-        r.y = y;
-
-        if (image == null) {
-            image = Util.loadImage("assets/bird.png");
-        }
-        r.image = image;
 
         rotation = (90 * (yvel + 20) / 20) - 90;
         rotation = rotation * Math.PI / 180;
@@ -64,11 +50,9 @@ public class Bird {
         if (rotation > Math.PI / 2)
             rotation = Math.PI / 2;
 
-        r.transform = new AffineTransform();
-        r.transform.translate(x + width / 2, y + height / 2);
-        r.transform.rotate(rotation);
-        r.transform.translate(-width / 2, -height / 2);
-
-        return r;
+        this.transform = new AffineTransform();
+        this.transform.translate(x + width / 2, y + height / 2);
+        this.transform.rotate(rotation);
+        this.transform.translate(-width / 2, -height / 2);
     }
 }
