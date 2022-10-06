@@ -43,6 +43,6 @@ public class Wall extends Obstacle {
 
     @Override
     public <C, T> T accept(C context, CollisionVisitor<C, T> v) {
-        return null;
+        return v.visit(context, this);
     }
 }

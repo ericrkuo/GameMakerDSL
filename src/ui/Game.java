@@ -1,5 +1,6 @@
 package ui;
 
+import ast.Obstacle;
 import ast.Wall;
 import libs.RenderableObject;
 
@@ -8,27 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-
-
     private Boolean paused;
-
     private int pauseDelay;
     private int restartDelay;
     private int pipeDelay;
-
     private Bird bird;
-    private ArrayList<Wall> walls;
     private Keyboard keyboard;
-
     public int score;
     public Boolean gameover;
     public Boolean started;
     public int speed;
-
     private List<RenderableObject> renderableList;
+    private CollisionVisitor<Bird, Boolean> collisionDetector;
+    private static final StringBuilder s = new StringBuilder();
 
     public Game() {
         keyboard = Keyboard.getInstance();
+        collisionDetector = new CollisionDetector();
         restart();
     }
 
@@ -99,9 +96,16 @@ public class Game {
         }
     }
 
-
     private void checkForCollisions() {
         // Ground + Bird collision
+        for (final RenderableObject r: renderableList) {
+            if (r instanceof Obstacle) {
+                if (((Obstacle) r).accept(bird, collisionDetector)) {
+                    gameover = true;
+                    break;
+                }
+            }
+        }
         if (bird.y + bird.height > App.HEIGHT - 80) {
             gameover = true;
             bird.y = App.HEIGHT - 80 - bird.height;
