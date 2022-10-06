@@ -1,7 +1,9 @@
 package ui;
 
-import ast.Obstacle;
+import ast.Portal;
 import ast.Wall;
+import ast.fireball.DefaultFireball;
+import ast.fireball.Fireball;
 import libs.RenderableObject;
 
 import java.awt.event.KeyEvent;
@@ -46,8 +48,12 @@ public class Game {
 
         bird = new Bird();
         Wall wall1 = new Wall(200, 0, 2, 3);
+        Fireball fireball1 = new DefaultFireball(500, 200, 4);
+        Portal portal1 = new Portal(800,300);
+        renderableList.add(fireball1);
         renderableList.add(bird);
         renderableList.add(wall1);
+        renderableList.add(portal1);
     }
 
     public void update() {

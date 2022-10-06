@@ -14,6 +14,7 @@ public class Wall extends Obstacle {
     public int width;
     public int x;
     private int y;
+    private final int gameUnit = 50;
     private String orientation; // dont need to be parsed, can be figured out from y position;
     public List<Block> blocks;
 
@@ -26,7 +27,7 @@ public class Wall extends Obstacle {
         blocks = new ArrayList<>();
         for(int i=0; i<height; i++){
             for(int j=0; j<width; j++){
-                blocks.add(new Block(x+(50*i), y+(50*j)));
+                blocks.add(new Block(x+(gameUnit*i), y+(gameUnit *j)));
             }
         }
     }
