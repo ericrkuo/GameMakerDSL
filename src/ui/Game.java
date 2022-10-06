@@ -5,6 +5,7 @@ import ast.Wall;
 import ast.fireball.DefaultFireball;
 import ast.fireball.Fireball;
 import libs.RenderableObject;
+import ast.Obstacle;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
