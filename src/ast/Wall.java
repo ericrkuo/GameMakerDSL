@@ -10,11 +10,9 @@ import java.util.List;
 
 public class Wall extends Obstacle {
 
-    private int height;
-    public int width;
     public int x;
     private int y;
-    private final int gameUnit = 50;
+    private final static int GAME_UNIT = 50;
     private String orientation; // dont need to be parsed, can be figured out from y position;
     public List<Block> blocks;
 
@@ -22,12 +20,12 @@ public class Wall extends Obstacle {
     public Wall(Integer posX, Integer posY, Integer wallHeight, Integer wallWidth) {
         x = posX;
         y = posY;
-        height = wallHeight;
-        width = wallWidth;
+        height = wallHeight * GAME_UNIT;
+        width = wallWidth * GAME_UNIT;
         blocks = new ArrayList<>();
-        for(int i=0; i<height; i++){
-            for(int j=0; j<width; j++){
-                blocks.add(new Block(x+(gameUnit*i), y+(gameUnit *j)));
+        for(int i=0; i<wallHeight; i++){
+            for(int j=0; j<wallWidth; j++){
+                blocks.add(new Block(x+(GAME_UNIT*i), y+(GAME_UNIT *j)));
             }
         }
     }

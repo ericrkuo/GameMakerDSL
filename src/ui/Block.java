@@ -7,12 +7,12 @@ import java.awt.*;
 
 public class Block extends Obstacle {
     public static final Image image = Util.loadImage("assets/wall.png"); // need to change later
-    public static final int height = 50;
-    public static final int width = 50;
     public Block(int xCor, int yCor) {
         x = xCor;
         y = yCor;
         img = image;
+        height = 50;
+        width = 50;
     }
 
     public void update(final int speed) {

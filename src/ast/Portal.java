@@ -11,7 +11,8 @@ public class Portal extends Obstacle {
         x = posX;
         y = posY;
         img = image;
-
+        height = 50;
+        width = 50;
     }
     @Override
     public <C, T> T accept(C context, CollisionVisitor<C, T> v) {

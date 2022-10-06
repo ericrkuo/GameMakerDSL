@@ -16,6 +16,7 @@ public class Game {
     private int pauseDelay;
     private int restartDelay;
     private int pipeDelay;
+
     private Bird bird;
     private Keyboard keyboard;
     public int score;
@@ -23,7 +24,7 @@ public class Game {
     public Boolean started;
     public int speed;
     private List<RenderableObject> renderableList;
-    private CollisionVisitor<Bird, Boolean> collisionDetector;
+    private CollisionVisitor<Game, Boolean> collisionDetector;
     private static final StringBuilder s = new StringBuilder();
 
     public Game() {
@@ -107,8 +108,7 @@ public class Game {
         // Ground + Bird collision
         for (final RenderableObject r: renderableList) {
             if (r instanceof Obstacle) {
-                if (((Obstacle) r).accept(bird, collisionDetector)) {
-                    gameover = true;
+                if (((Obstacle) r).accept(this, collisionDetector)) {
                     break;
                 }
             }
@@ -117,9 +117,18 @@ public class Game {
             gameover = true;
             bird.y = App.HEIGHT - 80 - bird.height;
         }
+        // TODO: collision with ceiling
+//        if (bird.y + bird.height > App.HEIGHT - 80) {
+//            gameover = true;
+//            bird.y = App.HEIGHT - 80 - bird.height;
+//        }
     }
 
     public List<RenderableObject> getRenderableList() {
         return renderableList;
+    }
+
+    public Bird getBird() {
+        return bird;
     }
 }

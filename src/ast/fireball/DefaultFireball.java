@@ -6,6 +6,8 @@ public class DefaultFireball extends Fireball {
         y = posY;
         setSpeed(speed);
         img = image;
+        height = 30;
+        width = 60;
     }
 
     @Override
