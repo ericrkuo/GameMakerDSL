@@ -1,10 +1,10 @@
 package ast;
 
-import libs.Renderer;
+import libs.RenderableObject;
 
 import java.util.PriorityQueue;
 
-public abstract class Level extends Renderer {
+public abstract class Level extends RenderableObject {
     private Integer speed;
     private Integer LevelNumber;
     private Integer length;

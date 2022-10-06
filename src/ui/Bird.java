@@ -1,11 +1,11 @@
 package ui;
 
-import libs.Renderer;
+import libs.RenderableObject;
 
 import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
 
-public class Bird extends Renderer {
+public class Bird extends RenderableObject {
 
     public int x;
     public int y;
@@ -14,7 +14,6 @@ public class Bird extends Renderer {
 
     public boolean dead;
 
-    private static final Image image = Util.loadImage("assets/bird.png");
     private Keyboard keyboard;
 
     public Bird() {
@@ -27,23 +26,16 @@ public class Bird extends Renderer {
         img = Util.loadImage("assets/bird.png");
     }
 
-    public void update() {
+    @Override
+    public void update(final int speed) {
         if (!dead && keyboard.isDown(KeyEvent.VK_UP)) {
             y -= 10;
         }
         if (!dead && keyboard.isDown(KeyEvent.VK_DOWN)) {
-            y +=10;
+            y += 10;
         }
 
+        transform = new AffineTransform();
+        transform.translate(x, y);
     }
-
-    public Render getRender() {
-        Render r = new Render();
-        r.x = x;
-        r.y = y;
-        r.image = image;
-        r.transform = new AffineTransform();
-        r.transform.translate(x , y);
-
-        return r;
-    }
+}

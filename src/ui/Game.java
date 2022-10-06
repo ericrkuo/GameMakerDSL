@@ -1,6 +1,7 @@
 package ui;
 
 import ast.Wall;
+import libs.RenderableObject;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -24,17 +25,18 @@ public class Game {
     public Boolean started;
     public int speed;
 
-    private List<Renderer> renderableList;
+    private List<RenderableObject> renderableList;
 
     public Game() {
         keyboard = Keyboard.getInstance();
-        renderableList = new ArrayList<>();
-        renderableList.add(new StaticImage("assets/background.png"));
-        renderableList.add(new StaticImage("assets/foreground.png"));
         restart();
     }
 
     public void restart() {
+        renderableList = new ArrayList<>();
+        renderableList.add(new StaticImage("assets/background.png"));
+        renderableList.add(new StaticImage("assets/foreground.png"));
+
         paused = false;
         started = false;
         gameover = false;
@@ -46,9 +48,9 @@ public class Game {
         speed = 3;
 
         bird = new Bird();
-        Wall wall1 = new Wall(200,0,2,3);
-        walls = new ArrayList<Wall>();
-        walls.add(wall1);
+        Wall wall1 = new Wall(200, 0, 2, 3);
+        renderableList.add(bird);
+        renderableList.add(wall1);
     }
 
     public void update() {
@@ -63,13 +65,11 @@ public class Game {
         if (paused)
             return;
 
-        bird.update();
-
         if (gameover)
             return;
 
-        moveWalls();
         checkForCollisions();
+        renderableList.forEach(r -> r.update(speed));
     }
 
     private void watchForStart() {
@@ -99,21 +99,8 @@ public class Game {
         }
     }
 
-    private void moveWalls() {
-        for(Wall wall: walls) {
-            wall.update(speed);
-        }
-    }
 
     private void checkForCollisions() {
-
-        for (Wall wall : walls) {
-            if (wall.collides(bird.x, bird.y, bird.width, bird.height)) {
-                gameover = true;
-                bird.dead = true;
-            }
-        }
-
         // Ground + Bird collision
         if (bird.y + bird.height > App.HEIGHT - 80) {
             gameover = true;
@@ -121,6 +108,7 @@ public class Game {
         }
     }
 
-    public List<Renderer> getRenderableList() {
+    public List<RenderableObject> getRenderableList() {
         return renderableList;
     }
+}

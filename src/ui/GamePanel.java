@@ -2,7 +2,8 @@ package ui;
 
 import javax.swing.JPanel;
 import java.awt.*;
-import libs.Renderer;
+
+import libs.RenderableObject;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -20,16 +21,12 @@ public class GamePanel extends JPanel implements Runnable {
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        Graphics2D g2D = (Graphics2D) g;
-        for (Renderer r : game.getRenderableList()) {
-            if (r.transform != null)
-                g2D.drawImage(r.img, r.transform, null);
-            else
-                g.drawImage(r.img, r.x, r.y, null);
+        for (RenderableObject r : game.getRenderableList()) {
+            r.render(g);
+            System.out.println(r);
         }
 
-
+        Graphics2D g2D = (Graphics2D) g;
         g2D.setColor(Color.BLACK);
 
         if (!game.started) {
