@@ -4,6 +4,7 @@ import ast.Portal;
 import ast.Wall;
 import ast.fireball.DefaultFireball;
 import ast.fireball.Fireball;
+import ast.fireball.RecurringFireball;
 import libs.RenderableObject;
 import ast.Obstacle;
 
@@ -15,7 +16,6 @@ public class Game {
     private Boolean paused;
     private int pauseDelay;
     private int restartDelay;
-    private int pipeDelay;
 
     private Bird bird;
     private Keyboard keyboard;
@@ -45,14 +45,18 @@ public class Game {
         score = 0;
         pauseDelay = 0;
         restartDelay = 0;
-        pipeDelay = 0;
         speed = 3;
 
         bird = new Bird();
         Wall wall1 = new Wall(200, 0, 2, 3);
-        Fireball fireball1 = new DefaultFireball(500, 200, 4);
+        Fireball fireball1 = new DefaultFireball(500, 200, 2);
         Portal portal1 = new Portal(800,300);
+        //recur timer is in 'frames',
+        Fireball fireball2 = new RecurringFireball(700, 300, 7,90);
+        Fireball fireball3 = new RecurringFireball(700, 250, 9,90);
         renderableList.add(fireball1);
+        renderableList.add(fireball2);
+        renderableList.add(fireball3);
         renderableList.add(bird);
         renderableList.add(wall1);
         renderableList.add(portal1);
