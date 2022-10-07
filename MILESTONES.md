@@ -137,3 +137,24 @@ Furthermore, Jifeng gave us a lot of great advice for building our AST such as u
 
 ## Any planned follow-up tasks
 In terms of next steps, we'll be finalizing our lexer/parser based on the feedback from our user studies, continue working on the UI, and implement the AST. We'll also be planning for our final user study for M4. 
+
+# Milestone 4
+
+## Status of implementation
+Finished PR for lexer/parser 
+- https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/pull/5 
+Improved Lexer/Parser based on user studies
+- https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/pull/8 
+Added PR for ParseTree to AST conversion
+- https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/pull/9 
+Have begun working on UI
+- https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/tree/ui 
+
+## Progress & Timeline
+- [Here](https://docs.google.com/document/d/1sPjLjNMnLESEZp0rIRhdijkrM3di5Ryl8ud1PNJVrLE/edit#bookmark=kix.ambtxxky84t4) is a breakdown of our planned tasks/work items along with our proposed deadlines
+
+## Plans for Final User Study
+We’ll be conducting our final user study next Wednesday and we're aiming to finish our UI before then
+
+## Notes of any important changes/feedback from TA discussion
+Jifeng said we're on track, and encouraged us to visit his office hours or contact him if we have any questions regarding to connecting AST with UI, final uesr studies, or in general, any concerns!
