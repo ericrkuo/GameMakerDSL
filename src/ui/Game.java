@@ -25,6 +25,8 @@ public class Game {
     public int speed;
     private List<RenderableObject> renderableList;
     private FireballSchedule listOfFireball;
+    public int activeStageIndex = 0;
+    public List<Stage> stages;
     private CollisionVisitor<Game, Boolean> collisionDetector;
     private static final StringBuilder s = new StringBuilder();
 
