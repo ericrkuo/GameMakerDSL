@@ -191,3 +191,88 @@ do every 2000 ms
     with speed 2
     if level > 2
 ```
+
+## Version 5
+Main changes
+- feedback from user studies
+
+```js
+/**
+ * Creation of a game
+*/
+create a game
+  called MyGame
+  of width 200
+  reward 50 every 5 units traveled
+
+/**
+ * Feature 1: Levels and nested stages
+ * - Each level can have mini levels called substages. This is similar to Super Mario Bros where the Mario can enter into another substage through the green pipe
+ * - Substages can be more challenging, and thus can reward with score multipliers 
+ * - If a substage is not entered, the character moves to the end of the level and onto the next level
+ * - When a character reaches the end of a substage, they return back to where they were in the level
+*/
+create level 1
+  with speed 2
+  with walls 1, 2
+  with fireballs 1
+  if hit (2,10)  go to substage 1
+  if hit (50,25) go to substage 2
+
+create level 2
+  with speed 2
+  with walls 1
+  if hit (5,5)   go to substage 1 // reuse of substage across levels
+  if hit (20,20) go to substage 3
+
+create substage 1
+  with speed 3
+  with walls 1
+  score * 2
+
+create substage 2
+  with speed 4
+  with walls 2
+  with fireballs 2
+  score + 500
+
+create substage 3
+  with speed 3
+  with walls 1, 2
+  with fireballs 2
+  score * 3
+
+/**
+ * Obstacle: walls
+ * - walls of varying dimensions can be placed in levels and substages
+ * - walls can be reused across levels and substages
+*/
+create walls 1
+  of height 5 and width 1
+  at (3,10)
+
+/**
+ * Feature 2: Object creation dependent upon some condition
+ * - Walls can be reused across future levels or stages to make them more difficult
+ * - Walls can be applied to specific substages or levels
+*/
+create walls 2
+  of height 1 and width 3
+  at (0, 20), (10, 10), (20, 30)
+
+/**
+ * Feature 3: Loops for fireballs
+ * - Fireballs come from the rightmost side of the screen/frame, move left, and disappear once they exit the screen
+ * - Fireballs take precedence over walls
+ * - Fireballs can be re-occurring or can be triggered once the character passes an x-coordinate
+*/
+create fireball 1
+  trigger every 50 units
+  at y=4
+  with speed 2
+
+create fireball 2
+  trigger at x = 30
+  at y=4
+  with speed 2
+```

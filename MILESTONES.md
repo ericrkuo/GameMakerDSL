@@ -86,3 +86,75 @@ Jifeng provided us with the following feedback based on our example inputs we ha
 - Conduct user studies and reiterate on our grammar based on feedback
 - AST Design
 - Concurrent work on UI for game platform
+
+# Milestone 3
+
+## Mockup of Concrete Language Design
+We mocked up our language design with some example inputs and gramamr.
+- [ExampleInput.md](/ExampleInput.md#version-4)
+- [DraftGrammar.md](/DraftGrammar.md)
+
+Furthermore, we've also made substantial progress in implementing our lexer and parser. See https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/pull/5
+
+## User Studies Results
+We created example inputs and outputs for our user studies:
+- [FirstUserStudyExampleInput.md](/FirstUserStudyExampleInput.md)
+- [FirstUserStudyExampleOutput.pdf](/FirstUserStudyExampleOutput.pdf)
+
+Here's the common feedback that we got from our user studies. Right now, our group is currently discussing and prioritizing which ideas to implement based on the results from our user studies.
+
+- Change loop for fireballs to not be by time, but by distance. Users were having a hard time picturing how time flows in our game, and instead, suggested to not use a time based mechanism. (e.g. do every 50 units vs do every 2000 ms)
+- Make condition for walls mandatory
+- User’s suggested to make condition for walls mandatory. Originally, having no condition meant that the walls applied for every level and substage, but we should make the user explicitly declare it so it’s easier for others to understand
+- BUG: User should be able to specify walls for only a substage, and also a level and a substage
+    - Right now we say if level = 1, if substage = 1
+    - But this is ambiguous if we mean a specific substage, or both the level and substage.
+    - Also we can’t just say “if substage = 1” because there can be multiple levels
+- BUG: We should indicate at what coordinate in x-axis the fireball gets triggered
+    - Regardless of whether fireball is looping or not
+    - Otherwise it’s ambiguous when the fireball gets triggered
+- Word “length” is confusing, should be “width”
+- Enforce stage id to be positive and somehow for users to write in ascending order
+- Coordinates
+    - What’s one block worth, 5 units? Hard to calculate
+    - Where should coordinates of walls be. If I say put a wall of height 10 and width 5 at (5,5), is it the upper left corner of the wall that is at (5,5)?
+- Users forget which walls they wrote and which they didn’t write
+    - This feedback is crucial - we need to make our language easy to use
+    - Possible solutions
+    - https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/issues/7  
+- Unnecessary words like of, and, a, handle, height, length, speed in our grammar
+
+## Progress & Timeline
+- [Here](https://docs.google.com/document/d/1sPjLjNMnLESEZp0rIRhdijkrM3di5Ryl8ud1PNJVrLE/edit#bookmark=kix.m4z93j95ajlk) is a breakdown of our planned tasks/work items along with our proposed deadlines. 
+- We've also gotten started on the UI https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/tree/ast_design
+
+## Notes of any important changes/feedback from TA discussion
+Our TA Jifeng said "Your plans for the fourth milestone look very good!" and "Secondly, congratulations on your current progress (finishing your first
+user study, and making substantial progress implementing the lexer and
+parser). Your plans for the next week are clear as well."
+
+Furthermore, Jifeng gave us a lot of great advice for building our AST such as using the traversal order of our parse tree to map to parts of our AST. He gave us very concrete and detailed feedback for this work item!
+
+## Any planned follow-up tasks
+In terms of next steps, we'll be finalizing our lexer/parser based on the feedback from our user studies, continue working on the UI, and implement the AST. We'll also be planning for our final user study for M4. 
+
+# Milestone 4
+
+## Status of implementation
+Finished PR for lexer/parser 
+- https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/pull/5 
+Improved Lexer/Parser based on user studies
+- https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/pull/8 
+Added PR for ParseTree to AST conversion
+- https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/pull/9 
+Have begun working on UI
+- https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/tree/ui 
+
+## Progress & Timeline
+- [Here](https://docs.google.com/document/d/1sPjLjNMnLESEZp0rIRhdijkrM3di5Ryl8ud1PNJVrLE/edit#bookmark=kix.ambtxxky84t4) is a breakdown of our planned tasks/work items along with our proposed deadlines
+
+## Plans for Final User Study
+We’ll be conducting our final user study next Wednesday and we're aiming to finish our UI before then
+
+## Notes of any important changes/feedback from TA discussion
+Jifeng said we're on track, and encouraged us to visit his office hours or contact him if we have any questions regarding to connecting AST with UI, final uesr studies, or in general, any concerns!
