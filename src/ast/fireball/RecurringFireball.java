@@ -3,17 +3,12 @@ package ast.fireball;
 import java.util.List;
 
 public class RecurringFireball extends Fireball {
-
+    int interval;
+    int counter;
     public RecurringFireball(int posX, int posY, int speed, int recurTimer){
-        initialX = posX;
-        x = posX;
-        y = posY;
+        super(posX, posY, speed);
         interval = recurTimer;
         counter = recurTimer;
-        setSpeed(speed);
-        img = image;
-        height = 30;
-        width = 60;
     }
 
 
