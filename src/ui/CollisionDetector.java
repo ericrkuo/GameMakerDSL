@@ -5,13 +5,13 @@ import ast.fireball.Fireball;
 import ast.Portal;
 import ast.Wall;
 
-import java.util.function.Function;
-
 public class CollisionDetector implements CollisionVisitor<Game, Boolean> {
     @Override
     public Boolean visit(Game game, Portal p) {
         return detectCollision(game, p, (boolean didCollide) -> {
-            // TODO: add set activeLevelIndex
+            if (didCollide) {
+                game.getCurrentLevel().activeSubstageId = p.destStageIndex;
+            }
         });
     }
 

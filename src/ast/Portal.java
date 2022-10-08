@@ -6,8 +6,10 @@ import ui.Util;
 import java.awt.*;
 
 public class Portal extends Obstacle {
+    public Integer destStageIndex;
     public static final Image image = Util.loadImage("assets/portal.png");
-    public Portal(int posX, int posY){
+    public Portal(int posX, int posY, int destStageIndex) {
+        this.destStageIndex = destStageIndex;
         x = posX;
         y = posY;
         img = image;
