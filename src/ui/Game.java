@@ -16,14 +16,13 @@ public class Game {
     private Boolean paused;
     private int pauseDelay;
     private int restartDelay;
-
     private Bird bird;
     private Keyboard keyboard;
     public int score;
     public Boolean gameover;
     public Boolean started;
     public int speed;
-    private FireballSchedule listOfFireball;
+    public int yBirdReturnsTo;
 
     public int activeLevelIndex;
     public Map<Integer, Level> levels;
@@ -35,16 +34,11 @@ public class Game {
         collisionDetector = new CollisionDetector();
         levels = new HashMap<>();
         activeLevelIndex = 1;
+        speed = 3;
         restart();
     }
 
     public void restart() {
-        Level level1 = new Level(1);
-        levels.put(level1.getId(), level1);
-        level1.addRenderableObject(new StaticImage("assets/background.png"));
-        level1.addRenderableObject(new StaticImage("assets/foreground.png"));
-        level1.setSpeed(3);
-
         paused = false;
         started = false;
         gameover = false;
@@ -52,22 +46,34 @@ public class Game {
         score = 0;
         pauseDelay = 0;
         restartDelay = 0;
-
         bird = new Bird();
-        listOfFireball = new FireballSchedule();
         Wall wall1 = new Wall(200, 0, 2, 3);
-        //recur timer is in 'frames',
-        RecurringFireball fireball2 = new RecurringFireball(600, 300, 3,50);
-        RecurringFireball fireball3 = new RecurringFireball(600, 250, 5,80);
-        listOfFireball.addFireballToSchedule(fireball2);
-        listOfFireball.addFireballToSchedule(fireball3);
-        listOfFireball.fireballSchedule.forEach(r -> getCurrentLevel().getRenderableObjects().add(r));
         Fireball fireball1 = new Fireball(500, 200, 2);
-        Portal portal1 = new Portal(800,300, 2);
-        //recur timer is in 'frames',
+        // check substage with `destStageIndex` exists
+        Portal portal1 = new Portal(800,300, 1);
+        // setup level
+        Level level1 = new Level(1);
+        levels.put(level1.getId(), level1);
+        level1.addRenderableObject(new StaticImage("assets/background.png"));
+        level1.addRenderableObject(new StaticImage("assets/foreground.png"));
+
         level1.addRenderableObject(fireball1);
         level1.addRenderableObject(wall1);
         level1.addRenderableObject(portal1);
+
+        //recur timer is in 'frames',
+        RecurringFireball fireball2 = new RecurringFireball(600, 300, 3,50);
+        RecurringFireball fireball3 = new RecurringFireball(600, 250, 5,80);
+        level1.listOfFireball.addFireballToSchedule(fireball2);
+        level1.listOfFireball.addFireballToSchedule(fireball3);
+        level1.listOfFireball.fireballSchedule.forEach(r -> level1.getRenderableObjects().add(r));
+        // setup substage
+        Substage substage1 = new Substage(1);
+        substage1.addRenderableObject(new Wall(300, 200, 3, 1));
+        substage1.addRenderableObject(new Fireball(500, 100, 2));
+        substage1.addRenderableObject(new Goal(800, true));
+
+        level1.addSubstage(substage1);
     }
 
     public void update() {
@@ -86,8 +92,8 @@ public class Game {
             return;
 
         checkForCollisions();
-        listOfFireball.updateScheduleFireballToRenderable(getCurrentLevel().getRenderableObjects());
-        getCurrentLevel().update(null);
+        bird.update(speed);
+        getCurrentLevel().update(speed);
     }
 
     private void watchForStart() {
@@ -143,12 +149,5 @@ public class Game {
 
     public Bird getBird() {
         return bird;
-    }
-    public int getActiveLevelIndex() {
-        return activeLevelIndex;
-    }
-
-    public void setActiveLevelIndex(int activeLevelIndex) {
-        this.activeLevelIndex = activeLevelIndex;
     }
 }

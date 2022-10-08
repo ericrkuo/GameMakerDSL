@@ -29,10 +29,11 @@ public class Bird extends RenderableObject {
     @Override
     public void update(final Integer speed) {
         if (!dead && keyboard.isDown(KeyEvent.VK_UP)) {
-            y -= 10;
+            y = Math.max(-height/2, y - 10);
         }
         if (!dead && keyboard.isDown(KeyEvent.VK_DOWN)) {
             y += 10;
+            y = Math.min(App.HEIGHT, y + 10);
         }
 
         transform = new AffineTransform();

@@ -9,4 +9,5 @@ public interface CollisionVisitor<C,T> {
     T visit(C context, Wall w);
     T visit(C context, Fireball f);
     T visit(C context, Block b);
+    T visit(C context, Goal g);
 }

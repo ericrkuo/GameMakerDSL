@@ -1,7 +1,10 @@
 package ui;
 
+import libs.RenderableObject;
+
 import java.awt.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Level extends Stage {
@@ -21,17 +24,27 @@ public class Level extends Stage {
         if (activeSubstageId == null) {
             getRenderableObjects().forEach(r -> r.render(g));
         } else {
-            final Substage substage = substages.get(activeSubstageId);
-            substage.getRenderableObjects().forEach(r -> r.render(g));
+            substages.get(activeSubstageId).render(g);
         }
     }
 
     @Override
     public void update(final Integer s) {
         if (activeSubstageId == null) {
-            getRenderableObjects().forEach(r -> r.update(getSpeed()));
+//            listOfFireball.updateScheduleFireballToRenderable(getRenderableObjects());
+//            getRenderableObjects().forEach(r -> r.update(s));
+            super.update(s);
         } else {
-            substages.get(activeSubstageId).update(null);
+            substages.get(activeSubstageId).update(s);
+        }
+    }
+
+    @Override
+    public List<RenderableObject> getRenderableObjects() {
+        if (activeSubstageId == null) {
+            return super.getRenderableObjects();
+        } else {
+            return substages.get(activeSubstageId).getRenderableObjects();
         }
     }
 }

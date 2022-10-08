@@ -3,8 +3,6 @@ package ui;
 import javax.swing.JPanel;
 import java.awt.*;
 
-import libs.RenderableObject;
-
 public class GamePanel extends JPanel implements Runnable {
 
     private Game game;
@@ -22,6 +20,7 @@ public class GamePanel extends JPanel implements Runnable {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         game.getCurrentLevel().render(g);
+        game.getBird().render(g);
 
         Graphics2D g2D = (Graphics2D) g;
         g2D.setColor(Color.BLACK);

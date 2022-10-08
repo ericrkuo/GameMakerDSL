@@ -9,8 +9,10 @@ public class CollisionDetector implements CollisionVisitor<Game, Boolean> {
     @Override
     public Boolean visit(Game game, Portal p) {
         return detectCollision(game, p, (boolean didCollide) -> {
-            if (didCollide) {
+            if (didCollide && !p.used) {
+                p.used = true;
                 game.getCurrentLevel().activeSubstageId = p.destStageIndex;
+                game.yBirdReturnsTo = game.getBird().y;
             }
         });
     }
@@ -39,6 +41,21 @@ public class CollisionDetector implements CollisionVisitor<Game, Boolean> {
     public Boolean visit(Game game, Block b) {
         return detectCollision(game, b, (boolean didCollide) -> {
             game.gameover = didCollide;
+        });
+    }
+
+    @Override
+    public Boolean visit(Game game, Goal g) {
+        return detectCollision(game, g, didCollide -> {
+            if (didCollide) {
+                if (g.isSubstage) {
+                    game.getCurrentLevel().activeSubstageId = null;
+                    game.getBird().y = game.yBirdReturnsTo;
+                    game.getBird().update(null);
+                } else {
+                    game.activeLevelIndex++;
+                }
+            }
         });
     }
 

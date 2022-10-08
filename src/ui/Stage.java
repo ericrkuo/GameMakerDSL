@@ -1,5 +1,6 @@
 package ui;
 
+import ast.fireball.FireballSchedule;
 import libs.Renderable;
 import libs.RenderableObject;
 
@@ -10,18 +11,20 @@ import java.util.List;
 public abstract class Stage implements Renderable {
 
     protected int id;
+    public FireballSchedule listOfFireball = new FireballSchedule();
 
-    private int speed;
     private List<RenderableObject> renderableObjects = new ArrayList<>();
 
     @Override
     public void update(final Integer s) {
-        getRenderableObjects().forEach(r -> r.update(getSpeed()));
+        getRenderableObjects().forEach(r -> r.update(s));
+        listOfFireball.updateScheduleFireballToRenderable(getRenderableObjects());
     }
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.lightGray);
+//        g.setColor(Color.lightGray);
+        g.drawImage(Util.loadImage("assets/space-bg.png"), 0, 0, null);
         renderableObjects.forEach(r -> r.render(g));
     }
 
@@ -38,13 +41,5 @@ public abstract class Stage implements Renderable {
 
     public List<RenderableObject> getRenderableObjects() {
         return renderableObjects;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
     }
 }

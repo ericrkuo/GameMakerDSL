@@ -22,7 +22,7 @@ public class Fireball extends Obstacle {
     }
 
     @Override
-    public void update(int speed) {
+    public void update(final Integer speed) {
         x -= speed + fireballSpeed;
     }
 
