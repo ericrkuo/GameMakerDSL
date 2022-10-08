@@ -10,6 +10,5 @@ public class StaticImage extends RenderableObject {
     }
 
     @Override
-    public void update(final int speed) {
-    }
+    public void update(final Integer speed) {}
 }

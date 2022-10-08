@@ -27,7 +27,7 @@ public class Bird extends RenderableObject {
     }
 
     @Override
-    public void update(final int speed) {
+    public void update(final Integer speed) {
         if (!dead && keyboard.isDown(KeyEvent.VK_UP)) {
             y -= 10;
         }

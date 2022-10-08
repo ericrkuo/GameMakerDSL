@@ -13,7 +13,7 @@ public class RecurringFireball extends Fireball {
 
 
     @Override
-    public void update(int speed) {
+    public void update(final Integer speed) {
         counter --;
         x -= speed + fireballSpeed;
 

@@ -2,7 +2,6 @@ package ast;
 
 import ui.Block;
 import ui.CollisionVisitor;
-import ui.Util;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -23,14 +22,15 @@ public class Wall extends Obstacle {
         height = wallHeight * GAME_UNIT;
         width = wallWidth * GAME_UNIT;
         blocks = new ArrayList<>();
-        for(int i=0; i<wallHeight; i++){
-            for(int j=0; j<wallWidth; j++){
+        for(int i=0; i<wallWidth; i++){
+            for(int j=0; j<wallHeight; j++){
                 blocks.add(new Block(x+(GAME_UNIT*i), y+(GAME_UNIT *j)));
             }
         }
     }
 
-    public void update(int speed) {
+    @Override
+    public void update(final Integer speed) {
         blocks.forEach(b -> b.update(speed));
     }
 
