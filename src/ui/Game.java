@@ -9,8 +9,8 @@ import libs.RenderableObject;
 import ast.Obstacle;
 
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Game {
     private Boolean paused;
@@ -23,23 +23,27 @@ public class Game {
     public Boolean gameover;
     public Boolean started;
     public int speed;
-    private List<RenderableObject> renderableList;
     private FireballSchedule listOfFireball;
-    public int activeStageIndex = 0;
-    public List<Stage> stages;
+
+    public int activeLevelIndex;
+    public Map<Integer, Level> levels;
     private CollisionVisitor<Game, Boolean> collisionDetector;
     private static final StringBuilder s = new StringBuilder();
 
     public Game() {
         keyboard = Keyboard.getInstance();
         collisionDetector = new CollisionDetector();
+        levels = new HashMap<>();
+        activeLevelIndex = 1;
         restart();
     }
 
     public void restart() {
-        renderableList = new ArrayList<>();
-        renderableList.add(new StaticImage("assets/background.png"));
-        renderableList.add(new StaticImage("assets/foreground.png"));
+        Level level1 = new Level(1);
+        levels.put(level1.getId(), level1);
+        level1.addRenderableObject(new StaticImage("assets/background.png"));
+        level1.addRenderableObject(new StaticImage("assets/foreground.png"));
+        level1.setSpeed(3);
 
         paused = false;
         started = false;
@@ -48,23 +52,22 @@ public class Game {
         score = 0;
         pauseDelay = 0;
         restartDelay = 0;
-        speed = 3;
 
         bird = new Bird();
         listOfFireball = new FireballSchedule();
         Wall wall1 = new Wall(200, 0, 2, 3);
-        Fireball fireball1 = new Fireball(500, 200, 2);
-        Portal portal1 = new Portal(800,300);
         //recur timer is in 'frames',
         RecurringFireball fireball2 = new RecurringFireball(600, 300, 3,50);
         RecurringFireball fireball3 = new RecurringFireball(600, 250, 5,80);
         listOfFireball.addFireballToSchedule(fireball2);
         listOfFireball.addFireballToSchedule(fireball3);
-        listOfFireball.fireballSchedule.forEach(r -> renderableList.add(r));
-        renderableList.add(fireball1);
-        renderableList.add(bird);
-        renderableList.add(wall1);
-        renderableList.add(portal1);
+        listOfFireball.fireballSchedule.forEach(r -> getCurrentLevel().getRenderableObjects().add(r));
+        Fireball fireball1 = new Fireball(500, 200, 2);
+        Portal portal1 = new Portal(800,300, 2);
+        //recur timer is in 'frames',
+        level1.addRenderableObject(fireball1);
+        level1.addRenderableObject(wall1);
+        level1.addRenderableObject(portal1);
     }
 
     public void update() {
@@ -83,8 +86,8 @@ public class Game {
             return;
 
         checkForCollisions();
-        listOfFireball.updateScheduleFireballToRenderable(renderableList);
-        renderableList.forEach(r -> r.update(speed));
+        listOfFireball.updateScheduleFireballToRenderable(getCurrentLevel().getRenderableObjects());
+        getCurrentLevel().update(null);
     }
 
     private void watchForStart() {
@@ -116,7 +119,7 @@ public class Game {
 
     private void checkForCollisions() {
         // Ground + Bird collision
-        for (final RenderableObject r: renderableList) {
+        for (final RenderableObject r: getCurrentLevel().getRenderableObjects()) {
             if (r instanceof Obstacle) {
                 if (((Obstacle) r).accept(this, collisionDetector)) {
                     break;
@@ -134,11 +137,18 @@ public class Game {
 //        }
     }
 
-    public List<RenderableObject> getRenderableList() {
-        return renderableList;
+    public Level getCurrentLevel() {
+        return levels.get(activeLevelIndex);
     }
 
     public Bird getBird() {
         return bird;
+    }
+    public int getActiveLevelIndex() {
+        return activeLevelIndex;
+    }
+
+    public void setActiveLevelIndex(int activeLevelIndex) {
+        this.activeLevelIndex = activeLevelIndex;
     }
 }
