@@ -4,6 +4,7 @@ import ast.Portal;
 import ast.Wall;
 import ast.fireball.DefaultFireball;
 import ast.fireball.Fireball;
+import ast.fireball.FireballSchedule;
 import ast.fireball.RecurringFireball;
 import libs.RenderableObject;
 import ast.Obstacle;
@@ -24,6 +25,7 @@ public class Game {
     public Boolean started;
     public int speed;
     private List<RenderableObject> renderableList;
+    private FireballSchedule listOfFireball;
     private CollisionVisitor<Game, Boolean> collisionDetector;
     private static final StringBuilder s = new StringBuilder();
 
@@ -48,15 +50,17 @@ public class Game {
         speed = 3;
 
         bird = new Bird();
+        listOfFireball = new FireballSchedule();
         Wall wall1 = new Wall(200, 0, 2, 3);
         Fireball fireball1 = new DefaultFireball(500, 200, 2);
         Portal portal1 = new Portal(800,300);
         //recur timer is in 'frames',
-        Fireball fireball2 = new RecurringFireball(700, 300, 7,90);
-        Fireball fireball3 = new RecurringFireball(700, 250, 9,90);
-        renderableList.add(fireball1);
-        renderableList.add(fireball2);
-        renderableList.add(fireball3);
+        Fireball fireball2 = new RecurringFireball(600, 300, 3,50);
+        Fireball fireball3 = new RecurringFireball(600, 250, 5,80);
+        listOfFireball.addFireballToSchedule(fireball1);
+        listOfFireball.addFireballToSchedule(fireball2);
+        listOfFireball.addFireballToSchedule(fireball3);
+        listOfFireball.fireballSchedule.forEach(r -> renderableList.add(r));
         renderableList.add(bird);
         renderableList.add(wall1);
         renderableList.add(portal1);
@@ -78,6 +82,7 @@ public class Game {
             return;
 
         checkForCollisions();
+        listOfFireball.updateScheduleFireballToRenderable(renderableList);
         renderableList.forEach(r -> r.update(speed));
     }
 
