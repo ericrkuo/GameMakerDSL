@@ -1,24 +1,24 @@
 package ui;
 
-import java.io.IOException;
+import ast.Program;
 import javax.swing.*;
+import static constants.Constant.*;
 
 public class App {
-    public static int WIDTH = 800;
-    public static int HEIGHT = 520;
-    public static void main(String[] args) throws IOException {
-        System.out.println("Hello World");
+    public static void createGame(Program program) {
+        System.out.println("Launching game...");
         JFrame frame = new JFrame();
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
 
         Keyboard keyboard = Keyboard.getInstance();
         frame.addKeyListener(keyboard);
 
-        GamePanel panel = new GamePanel();
+        GamePanel panel = new GamePanel(program);
         frame.add(panel);
         frame.setResizable(false);
-        frame.setSize(WIDTH, HEIGHT);
+        frame.setSize(GAME_WIDTH, GAME_HEIGHT);
+        // https://stackoverflow.com/a/16327279
+        frame.setLocationRelativeTo(null);
     }
 }

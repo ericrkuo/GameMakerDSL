@@ -5,8 +5,7 @@ import enums.*;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.apache.commons.collections4.CollectionUtils;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Converts a parse tree to an AST.
@@ -38,6 +37,8 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
             program.getFireballs().put(fireball.getId(), fireball);
         }
 
+        // now that we have parsed all obstacles, render the objects in each stage and level
+        program.renderAllObjects();
         return program;
     }
 
@@ -59,15 +60,15 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
         List<Integer> fireballIds = (ctx.withFireballs() != null) ?
                 ((Ids) ctx.withFireballs().ids().accept(this)).getIds()
                 : Collections.emptyList();
-        Level level = new Level(id, speed, wallIds, fireballIds);
+        Map<Coordinate, Integer> coordinateToSubstageIdMap = new HashMap<>();
 
         for (GameParser.SubstageLocationContext s : CollectionUtils.emptyIfNull(ctx.substageLocation())) {
             Coordinate coordinate = (Coordinate) s.coordinate().accept(this);
             Integer substageID = Integer.parseInt(s.NUM().getText());
-            level.getCoordinateToSubstageIdMap().put(coordinate, substageID);
+            coordinateToSubstageIdMap.put(coordinate, substageID);
         }
 
-        return level;
+        return new Level(id, speed, wallIds, fireballIds, coordinateToSubstageIdMap);
     }
 
     @Override
@@ -89,13 +90,13 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
         Integer id = Integer.parseInt(ctx.NUM().getText());
         Integer height = Integer.parseInt(ctx.dimension().NUM(0).getText());
         Integer width = Integer.parseInt(ctx.dimension().NUM(1).getText());
-        Wall wall = new Wall(id, height, width);
+        List<Coordinate> coordinates = new ArrayList<>();
 
         for (GameParser.CoordinateContext c : ctx.coordinates().coordinate()) {
-            wall.getCoordinates().add((Coordinate) c.accept(this));
+            coordinates.add((Coordinate) c.accept(this));
         }
 
-        return wall;
+        return new Wall(id, height, width, coordinates);
     }
 
     @Override

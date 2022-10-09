@@ -1,5 +1,6 @@
 package ast;
 
+import ui.Goal;
 import java.util.List;
 
 /**
@@ -15,5 +16,19 @@ public class Substage extends Stage {
 
     public Score getScore() {
         return score;
+    }
+
+    @Override
+    public void populateGoal(Game game) {
+        this.renderableObjects.add(new Goal(game.getWidth(), true));
+    }
+
+    /**
+     * We need to populate the objects again because a substage can be reused across multiple levels
+     */
+    public Substage copy(Program program) {
+        Substage substage = new Substage(getId(), getSpeed(), getWallIDs(), getFireballIDs(), getScore());
+        substage.populateObjects(program);
+        return substage;
     }
 }

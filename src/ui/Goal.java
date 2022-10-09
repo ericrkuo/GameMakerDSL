@@ -1,6 +1,6 @@
 package ui;
 
-import temp.Obstacle;
+import static constants.Constant.GAME_HEIGHT;
 
 public class Goal extends Obstacle {
     public boolean isSubstage;
@@ -9,10 +9,11 @@ public class Goal extends Obstacle {
         this.x = x;
         this.y = 0;
         this.width = 10;
-        this.height = App.HEIGHT;
+        this.height = GAME_HEIGHT;
         this.img = Util.loadImage("assets/goal.png");
         this.isSubstage = isSubstage;
     }
+
     @Override
     public <C, T> T accept(C context, CollisionVisitor<C, T> v) {
         return v.visit(context, this);

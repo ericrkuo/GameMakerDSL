@@ -37,4 +37,15 @@ public class Program extends Node {
     public Map<Integer, Fireball> getFireballs() {
         return fireballs;
     }
+
+    /**
+     * Create all new levels and substage objects, so we reset positions.
+     * Render all objects again for each substage and level.
+     */
+    public void renderAllObjects() {
+        this.levels.forEach((key, value) -> this.levels.put(key, value.copy()));
+        this.subStages.forEach((key, value) -> this.subStages.put(key, value.copy(this)));
+        this.getSubStages().values().forEach(s -> s.populateObjects(this));
+        this.getLevels().values().forEach(l -> l.populateObjects(this));
+    }
 }

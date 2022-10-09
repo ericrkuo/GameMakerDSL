@@ -1,17 +1,17 @@
 package ui;
 
-import java.awt.Image;
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
 public class Util {
 
-    private static HashMap<String, Image> cache = new HashMap<String, Image>();
+    private static final HashMap<String, BufferedImage> cache = new HashMap<>();
 
-    public static Image loadImage(String path) {
-        Image image = null;
+    public static BufferedImage loadImage(String path) {
+        BufferedImage image = null;
 
         if (cache.containsKey(path)) {
             return cache.get(path);
@@ -23,8 +23,7 @@ public class Util {
             if (!cache.containsKey(path)) {
                 cache.put(path, image);
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

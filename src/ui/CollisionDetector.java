@@ -1,9 +1,7 @@
 package ui;
 
-import temp.Obstacle;
-import temp.fireball.Fireball;
-import temp.Portal;
-import temp.Wall;
+import ast.Fireball;
+import ast.Wall;
 
 public class CollisionDetector implements CollisionVisitor<Game, Boolean> {
     @Override
@@ -11,7 +9,7 @@ public class CollisionDetector implements CollisionVisitor<Game, Boolean> {
         return detectCollision(game, p, (boolean didCollide) -> {
             if (didCollide && !p.used) {
                 p.used = true;
-                game.getCurrentLevel().activeSubstageId = p.destStageIndex;
+                game.getCurrentLevel().activeSubstage = p.substageDestination;
                 game.yBirdReturnsTo = game.getBird().y;
             }
         });
@@ -19,10 +17,7 @@ public class CollisionDetector implements CollisionVisitor<Game, Boolean> {
 
     @Override
     public Boolean visit(Game game, Wall w) {
-//        return detectCollision(game, w, (boolean didCollide) -> {
-//            game.gameover = true;
-//        });
-        for (final Block b: w.blocks) {
+        for (final Block b : w.getBlocks()) {
             if (b.accept(game, this)) {
                 return true;
             }
@@ -32,16 +27,12 @@ public class CollisionDetector implements CollisionVisitor<Game, Boolean> {
 
     @Override
     public Boolean visit(Game game, Fireball f) {
-        return detectCollision(game, f, (boolean didCollide) -> {
-            game.gameover = didCollide;
-        });
+        return detectCollision(game, f, (boolean didCollide) -> game.isGameOver = didCollide);
     }
 
     @Override
     public Boolean visit(Game game, Block b) {
-        return detectCollision(game, b, (boolean didCollide) -> {
-            game.gameover = didCollide;
-        });
+        return detectCollision(game, b, (boolean didCollide) -> game.isGameOver = didCollide);
     }
 
     @Override
@@ -49,9 +40,9 @@ public class CollisionDetector implements CollisionVisitor<Game, Boolean> {
         return detectCollision(game, g, didCollide -> {
             if (didCollide) {
                 if (g.isSubstage) {
-                    game.getCurrentLevel().activeSubstageId = null;
+                    game.getCurrentLevel().activeSubstage = null;
                     game.getBird().y = game.yBirdReturnsTo;
-                    game.getBird().update(null);
+                    game.getBird().update(0);
                 } else {
                     game.activeLevelIndex++;
                 }
@@ -60,16 +51,16 @@ public class CollisionDetector implements CollisionVisitor<Game, Boolean> {
     }
 
     private boolean detectCollision(Game game, Obstacle obstacle, Callback callback) {
-        final Bird bird = game.getBird();
+        final Character character = game.getBird();
         final int obstacleTop = obstacle.y;
         final int obstacleBottom = obstacle.y + obstacle.height;
         final int obstacleLeft = obstacle.x;
         final int obstacleRight = obstacle.x + obstacle.width;
 
-        final int birdLeft = bird.x;
-        final int birdRight = bird.x + bird.width;
-        final int birdTop = bird.y;
-        final int birdBottom = bird.y + bird.height;
+        final int birdLeft = character.x;
+        final int birdRight = character.x + character.width;
+        final int birdTop = character.y;
+        final int birdBottom = character.y + character.height;
         int v = (Math.min(obstacleBottom, birdBottom) - Math.max(obstacleTop, birdTop));
         int h = (Math.min(obstacleRight, birdRight) - Math.max(obstacleLeft, birdLeft));
         boolean didCollide = v > 0 && h > 0;

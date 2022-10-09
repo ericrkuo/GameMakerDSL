@@ -1,17 +1,17 @@
 package ui;
 
-import temp.Obstacle;
-
 import java.awt.*;
+import static constants.Constant.GAME_UNIT;
 
 public class Block extends Obstacle {
     public static final Image image = Util.loadImage("assets/wall.png"); // need to change later
+
     public Block(int xCor, int yCor) {
         x = xCor;
         y = yCor;
         img = image;
-        height = 50;
-        width = 50;
+        height = GAME_UNIT;
+        width = GAME_UNIT;
     }
 
     public void update(final int speed) {

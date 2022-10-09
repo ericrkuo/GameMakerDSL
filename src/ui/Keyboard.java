@@ -8,39 +8,40 @@ public class Keyboard implements KeyListener {
 
     private boolean[] keys;
 
-        private Keyboard() {
-            keys = new boolean[256];
+    private Keyboard() {
+        keys = new boolean[256];
+    }
+
+    public static ui.Keyboard getInstance() {
+
+        if (instance == null) {
+            instance = new ui.Keyboard();
         }
 
-        public static ui.Keyboard getInstance() {
+        return instance;
+    }
 
-            if (instance == null) {
-                instance = new ui.Keyboard();
-            }
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() >= 0 && e.getKeyCode() < keys.length) {
+            keys[e.getKeyCode()] = true;
+        }
+    }
 
-            return instance;
+    public void keyReleased(KeyEvent e) {
+        if (e.getKeyCode() >= 0 && e.getKeyCode() < keys.length) {
+            keys[e.getKeyCode()] = false;
+        }
+    }
+
+    public void keyTyped(KeyEvent e) {
+    }
+
+    public boolean isDown(int key) {
+
+        if (key >= 0 && key < keys.length) {
+            return keys[key];
         }
 
-        public void keyPressed(KeyEvent e) {
-            if (e.getKeyCode() >= 0 && e.getKeyCode() < keys.length) {
-                keys[e.getKeyCode()] = true;
-            }
-        }
-
-        public void keyReleased(KeyEvent e) {
-            if (e.getKeyCode() >= 0 && e.getKeyCode() < keys.length) {
-                keys[e.getKeyCode()] = false;
-            }
-        }
-
-        public void keyTyped(KeyEvent e) {}
-
-        public boolean isDown(int key) {
-
-            if (key >= 0 && key < keys.length) {
-                return keys[key];
-            }
-
-            return false;
-        }
+        return false;
+    }
 }

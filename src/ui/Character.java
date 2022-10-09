@@ -4,36 +4,35 @@ import libs.RenderableObject;
 
 import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
+import static constants.Constant.*;
 
-public class Bird extends RenderableObject {
+public class Character extends RenderableObject {
 
     public int x;
     public int y;
     public int width;
     public int height;
-
     public boolean dead;
+    private final Keyboard keyboard;
 
-    private Keyboard keyboard;
-
-    public Bird() {
-        x = 0;
-        y = 150;
+    public Character() {
+        x = 10;
+        y = GAME_HEIGHT/2 - 50;
         width = 45;
         height = 32;
         dead = false;
         keyboard = Keyboard.getInstance();
+        // TODO change this image
         img = Util.loadImage("assets/bird.png");
     }
 
     @Override
     public void update(final Integer speed) {
         if (!dead && keyboard.isDown(KeyEvent.VK_UP)) {
-            y = Math.max(-height/2, y - 10);
+            y -= CHARACTER_SPEED;
         }
         if (!dead && keyboard.isDown(KeyEvent.VK_DOWN)) {
-            y += 10;
-            y = Math.min(App.HEIGHT, y + 10);
+            y += CHARACTER_SPEED;
         }
 
         transform = new AffineTransform();

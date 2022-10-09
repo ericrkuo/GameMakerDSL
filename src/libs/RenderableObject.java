@@ -1,10 +1,11 @@
 package libs;
 
+import ast.Node;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
-//considering to ditch this whole class to just use java.awt Image class
-public abstract class RenderableObject implements Renderable {
+//considering ditching this whole class to just use java.awt Image class
+public abstract class RenderableObject extends Node implements Renderable {
     public int x;
     public int y;
     public Image img;

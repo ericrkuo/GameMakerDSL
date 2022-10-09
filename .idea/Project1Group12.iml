@@ -14,6 +14,7 @@
     <orderEntry type="library" name="antlr-4.10.1-complete" level="project" />
     <orderEntry type="library" name="commons-collections4-4.4" level="project" />
     <orderEntry type="library" name="commons-collections4-4.4-javadoc" level="project" />
-    <orderEntry type="library" name="gson-2.9.1.jar" level="project" />
+    <orderEntry type="library" name="gson-2.9.1" level="project" />
+    <orderEntry type="library" name="annotations-23.0.0" level="project" />
   </component>
 </module>
