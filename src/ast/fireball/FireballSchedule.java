@@ -27,7 +27,7 @@ public class FireballSchedule{
             if(fireball.counter==0){
                 toAdd.add(new RecurringFireball(fireball.initialX, fireball.y, fireball.fireballSpeed, fireball.interval));
             }
-            if(fireball.x< -fireball.width ){
+            if(fireball.x< -fireball.width && fireball.counter <=0){
                 toRemove.add(fireball);
             }
 
