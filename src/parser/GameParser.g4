@@ -1,15 +1,14 @@
-parser grammar EndlessRunnerMakerParser;
-options { tokenVocab=EndlessRunnerMakerLexer; }
+parser grammar GameParser;
+options { tokenVocab=GameLexer; }
 
-program: game (level)+ (substage)* (obstacle)* EOF;
-game: GAME_START TEXT widthDimension reward;
+program: game (level)+ (substage)* (wall)* (fireball)* EOF;
+game: GAME_START TEXT WIDTH_DIMENSION NUM reward;
 
 // game config
 dimension : DIMENSION_START NUM DIMENSION_SEP NUM;
-widthDimension: WIDTH_DIMENSION NUM;
 reward: REWARD_START NUM REWARD_SEP NUM UNITS TRAVELED;
 speed: SPEED NUM;
-coordinate: LEFT_BRACE NUM COMMA RIGHT_BRACE;
+coordinate: LEFT_BRACE NUM COMMA NUM RIGHT_BRACE;
 coordinates: (coordinate (COMMA coordinate)*);
 score: SCORE OP NUM;
 y_coordinate: Y_COORDINATE NUM;
@@ -23,7 +22,6 @@ withFireballs: WITH_FB ids;
 ids: (NUM (COMMA NUM)*);
 
 // obstacles
-obstacle: wall | fireball;
 wall: WALL_START NUM dimension WALL_SEP coordinates;
 fireball: FIREBALL_START NUM trigger y_coordinate speed?;
 trigger: loopTrigger | staticTrigger;

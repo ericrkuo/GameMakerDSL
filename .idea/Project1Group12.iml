@@ -7,9 +7,13 @@
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/lib" type="java-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/src/parser/gen" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="antlr-4.10.1-complete" level="project" />
+    <orderEntry type="library" name="commons-collections4-4.4" level="project" />
+    <orderEntry type="library" name="commons-collections4-4.4-javadoc" level="project" />
+    <orderEntry type="library" name="gson-2.9.1.jar" level="project" />
   </component>
 </module>
