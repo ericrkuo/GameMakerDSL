@@ -15,3 +15,4 @@
   - coordinate x: 0 - (game width)
   - coordinate y: 0 - 450 (500 Game Height, 50 for a box)
   - score: 1 - 1000
+- Duplicate coordinates with the same wall
