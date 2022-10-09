@@ -52,14 +52,7 @@ public class GamePanel extends JPanel implements Runnable {
         if (currentLevel.activeSubstage != null) {
             image = Util.loadImage("assets/space-bg.png");
         }
-
-        Image img = image.getScaledInstance(image.getWidth(), GAME_HEIGHT, Image.SCALE_SMOOTH);
-        image = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-
-        // Draw the image on to the buffered image
-        Graphics2D bGr = image.createGraphics();
-        bGr.drawImage(img, 0, 0, null);
-        bGr.dispose();
+        image = Util.scaleImage(image.getWidth(), GAME_HEIGHT, image);
 
         int tileWidth = image.getWidth();
         int tileHeight = image.getHeight();
