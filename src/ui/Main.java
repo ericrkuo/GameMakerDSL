@@ -5,6 +5,7 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.TokenStream;
+import parser.DynamicCheck;
 import parser.GameLexer;
 import parser.GameParser;
 import parser.ParseTreeToAST;
@@ -24,6 +25,9 @@ public class Main {
         GameParser parser = new GameParser(tokens);
         ParseTreeToAST visitor = new ParseTreeToAST();
         Program parsedProgram = visitor.visitProgram(parser.program());
+        // dynamic check
+        DynamicCheck dynamicCheck = new DynamicCheck(parsedProgram);
+        dynamicCheck.check();
         System.out.println("Done parsing");
 
         // print out object for now
