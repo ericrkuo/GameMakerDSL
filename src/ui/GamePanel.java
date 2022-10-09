@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
         renderBackground((Graphics2D) g, game.getCurrentLevel());
         game.getCurrentLevel().render(g);
-        game.getBird().render(g);
+        game.getCharacter().render(g);
 
         Graphics2D g2D = (Graphics2D) g;
         g2D.setColor(Color.BLACK);

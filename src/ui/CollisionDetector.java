@@ -10,7 +10,7 @@ public class CollisionDetector implements CollisionVisitor<Game, Boolean> {
             if (didCollide && !p.used) {
                 p.used = true;
                 game.getCurrentLevel().activeSubstage = p.substageDestination;
-                game.yBirdReturnsTo = game.getBird().y;
+                game.yPosCharacterReturnsTo = game.getCharacter().y;
             }
         });
     }
@@ -41,8 +41,8 @@ public class CollisionDetector implements CollisionVisitor<Game, Boolean> {
             if (didCollide) {
                 if (g.isSubstage) {
                     game.getCurrentLevel().activeSubstage = null;
-                    game.getBird().y = game.yBirdReturnsTo;
-                    game.getBird().update(0);
+                    game.getCharacter().y = game.yPosCharacterReturnsTo;
+                    game.getCharacter().update(0);
                 } else {
                     game.activeLevelIndex++;
                 }
@@ -51,18 +51,18 @@ public class CollisionDetector implements CollisionVisitor<Game, Boolean> {
     }
 
     private boolean detectCollision(Game game, Obstacle obstacle, Callback callback) {
-        final Character character = game.getBird();
+        final Character character = game.getCharacter();
         final int obstacleTop = obstacle.y;
         final int obstacleBottom = obstacle.y + obstacle.height;
         final int obstacleLeft = obstacle.x;
         final int obstacleRight = obstacle.x + obstacle.width;
 
-        final int birdLeft = character.x;
-        final int birdRight = character.x + character.width;
-        final int birdTop = character.y;
-        final int birdBottom = character.y + character.height;
-        int v = (Math.min(obstacleBottom, birdBottom) - Math.max(obstacleTop, birdTop));
-        int h = (Math.min(obstacleRight, birdRight) - Math.max(obstacleLeft, birdLeft));
+        final int characterLeft = character.x;
+        final int characterRight = character.x + character.width;
+        final int characterTop = character.y;
+        final int characterBottom = character.y + character.height;
+        int v = (Math.min(obstacleBottom, characterBottom) - Math.max(obstacleTop, characterTop));
+        int h = (Math.min(obstacleRight, characterRight) - Math.max(obstacleLeft, characterLeft));
         boolean didCollide = v > 0 && h > 0;
         callback.callback(didCollide);
         return didCollide;

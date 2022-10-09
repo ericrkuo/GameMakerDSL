@@ -18,7 +18,7 @@ public class Game {
     public Boolean isGameOver;
     public Boolean isGameStarted;
     public int speed;
-    public int yBirdReturnsTo;
+    public int yPosCharacterReturnsTo;
 
     public int activeLevelIndex;
     private final CollisionVisitor<Game, Boolean> collisionDetector;
@@ -96,7 +96,7 @@ public class Game {
     }
 
     private void checkForCollisions() {
-        // Ground + Bird collision
+        // Ground + Character collision
         for (final RenderableObject r : getCurrentLevel().getRenderableObjects()) {
             if (r instanceof Obstacle) {
                 if (((Obstacle) r).accept(this, collisionDetector)) {
@@ -119,7 +119,7 @@ public class Game {
         return program.getLevels().get(activeLevelIndex);
     }
 
-    public Character getBird() {
+    public Character getCharacter() {
         return character;
     }
 }
