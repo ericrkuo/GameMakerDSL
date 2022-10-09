@@ -5,7 +5,7 @@ import ui.CollisionVisitor;
 import ui.Obstacle;
 import ui.Util;
 
-import java.awt.*;
+import java.awt.image.BufferedImage;
 
 import static constants.Constant.*;
 
@@ -19,7 +19,7 @@ public class Fireball extends Obstacle {
     private final Integer y_coordinate;
     private final Trigger trigger;
     private Integer counter;
-    private static final Image image = Util.loadImage("assets/fireball.png");
+    private static final BufferedImage image = Util.loadImage("assets/fireball.png");
 
     public Fireball(Integer id, Speed speed, Integer y_coordinate, Trigger trigger) {
         this.id = id;
@@ -32,8 +32,8 @@ public class Fireball extends Obstacle {
         this.x = trigger.getTriggerFlavour() == TriggerFlavour.Static ? trigger.getValue() : GAME_WIDTH;
         this.y = y_coordinate;
         this.img = image;
-        this.height = FIREBALL_HEIGHT;
-        this.width = FIREBALL_WIDTH;
+        this.height = img.getHeight();
+        this.width = img.getWidth();
     }
 
     public Integer getId() {

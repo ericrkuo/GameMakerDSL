@@ -2,13 +2,12 @@ package ui;
 
 import ast.Coordinate;
 import ast.Substage;
-import java.awt.*;
-import static constants.Constant.PORTAL_SIZE;
+import java.awt.image.BufferedImage;
 
 public class Portal extends Obstacle {
     public Substage substageDestination;
     public boolean used;
-    public static final Image image = Util.loadImage("assets/portal.png");
+    public static final BufferedImage image = Util.loadImage("assets/portal.png");
 
     public Portal(Coordinate coordinate, Substage substageDestination) {
         this.substageDestination = substageDestination;
@@ -16,8 +15,8 @@ public class Portal extends Obstacle {
         x = coordinate.getX();
         y = coordinate.getY();
         img = image;
-        height = PORTAL_SIZE;
-        width = PORTAL_SIZE;
+        height = img.getHeight();
+        width = img.getWidth();
     }
 
     @Override

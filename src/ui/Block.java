@@ -1,10 +1,11 @@
 package ui;
 
-import java.awt.*;
+import java.awt.image.BufferedImage;
+
 import static constants.Constant.GAME_UNIT;
 
 public class Block extends Obstacle {
-    public static final Image image = Util.loadImage("assets/wall.png"); // need to change later
+    public static final BufferedImage image = Util.loadImage("assets/wall.png"); // need to change later
 
     public Block(int xCor, int yCor) {
         x = xCor;

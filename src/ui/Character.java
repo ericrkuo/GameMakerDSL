@@ -16,14 +16,15 @@ public class Character extends RenderableObject {
     private final Keyboard keyboard;
 
     public Character() {
-        x = 10;
-        y = GAME_HEIGHT/2 - 50;
-        width = 45;
-        height = 32;
-        dead = false;
-        keyboard = Keyboard.getInstance();
         // TODO change this image
         img = Util.loadImage("assets/bird.png");
+        width = img.getWidth();
+        height = img.getHeight();
+        x = width;
+        y = GAME_HEIGHT/2 - height;
+        dead = false;
+        keyboard = Keyboard.getInstance();
+
     }
 
     @Override

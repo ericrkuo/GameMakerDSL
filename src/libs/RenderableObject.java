@@ -3,12 +3,13 @@ package libs;
 import ast.Node;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 
 //considering ditching this whole class to just use java.awt Image class
 public abstract class RenderableObject extends Node implements Renderable {
     public int x;
     public int y;
-    public Image img;
+    public BufferedImage img;
     public AffineTransform transform;
 
     @Override
