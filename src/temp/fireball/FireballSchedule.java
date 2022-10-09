@@ -1,4 +1,4 @@
-package ast.fireball;
+package temp.fireball;
 
 import libs.RenderableObject;
 

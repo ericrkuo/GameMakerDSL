@@ -1,9 +1,9 @@
 package ui;
 
-import ast.Obstacle;
-import ast.fireball.Fireball;
-import ast.Portal;
-import ast.Wall;
+import temp.Obstacle;
+import temp.fireball.Fireball;
+import temp.Portal;
+import temp.Wall;
 
 public class CollisionDetector implements CollisionVisitor<Game, Boolean> {
     @Override

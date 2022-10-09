@@ -1,6 +1,6 @@
 package ui;
 
-import ast.Obstacle;
+import temp.Obstacle;
 
 public class Goal extends Obstacle {
     public boolean isSubstage;

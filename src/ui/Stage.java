@@ -1,6 +1,6 @@
 package ui;
 
-import ast.fireball.FireballSchedule;
+import temp.fireball.FireballSchedule;
 import libs.Renderable;
 import libs.RenderableObject;
 

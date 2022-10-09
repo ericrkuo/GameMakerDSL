@@ -1,7 +1,6 @@
 package ui;
 
-import ast.Obstacle;
-import libs.RenderableObject;
+import temp.Obstacle;
 
 import java.awt.*;
 

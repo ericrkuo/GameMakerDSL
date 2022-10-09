@@ -1,6 +1,4 @@
-package ast.fireball;
-
-import java.util.List;
+package temp.fireball;
 
 public class RecurringFireball extends Fireball {
     int interval;

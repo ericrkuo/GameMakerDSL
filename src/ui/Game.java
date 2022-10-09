@@ -1,12 +1,11 @@
 package ui;
 
-import ast.Portal;
-import ast.Wall;
-import ast.fireball.Fireball;
-import ast.fireball.FireballSchedule;
-import ast.fireball.RecurringFireball;
+import temp.Portal;
+import temp.Wall;
+import temp.fireball.Fireball;
+import temp.fireball.RecurringFireball;
 import libs.RenderableObject;
-import ast.Obstacle;
+import temp.Obstacle;
 
 import java.awt.event.KeyEvent;
 import java.util.HashMap;

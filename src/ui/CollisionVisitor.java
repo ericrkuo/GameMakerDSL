@@ -1,8 +1,8 @@
 package ui;
 
-import ast.fireball.Fireball;
-import ast.Portal;
-import ast.Wall;
+import temp.fireball.Fireball;
+import temp.Portal;
+import temp.Wall;
 
 public interface CollisionVisitor<C,T> {
     T visit(C context, Portal p);

@@ -1,6 +1,6 @@
-package ast.fireball;
+package temp.fireball;
 
-import ast.Obstacle;
+import temp.Obstacle;
 import ui.CollisionVisitor;
 import ui.Util;
 
