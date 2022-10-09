@@ -1,4 +1,4 @@
-lexer grammar EndlessRunnerMakerLexer;
+lexer grammar GameLexer;
 
 // (DEFAULT MODE)
 GAME_START: 'create a game' WS* 'called' WS* -> mode(TEXT_MODE);
