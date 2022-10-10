@@ -2,6 +2,9 @@ package ui;
 
 import ast.Level;
 import ast.Program;
+import ast.Reward;
+import ast.Score;
+import enums.Operator;
 import libs.RenderableObject;
 
 import java.awt.event.KeyEvent;
@@ -15,6 +18,8 @@ public class Game {
     private Character character;
     private final Keyboard keyboard;
     public int score;
+    public Reward reward;
+    public boolean subStageScoreModified;
     public Boolean isGameOver;
     public Boolean isGameStarted;
     public int speed;
@@ -30,6 +35,7 @@ public class Game {
         collisionDetector = new CollisionDetector();
         activeLevelIndex = 1;
         speed = 3;
+        reward = program.getGame().getReward();
         restart();
     }
 
@@ -67,6 +73,7 @@ public class Game {
                 : getCurrentLevel().activeSubstage.getSpeed().getValue();
         character.update(speed);
         getCurrentLevel().update(speed);
+        updateScore();
     }
 
     private void watchForStart() {
@@ -121,5 +128,34 @@ public class Game {
 
     public Character getCharacter() {
         return character;
+    }
+
+    public void updateScore(){
+        if(reward.getCounter() == reward.getDistance()){
+            score += reward.getValue();
+        }
+
+        if(getCurrentLevel().activeSubstage != null && !subStageScoreModified){
+            Score modifyScore = getCurrentLevel().activeSubstage.getScore();
+            score = changeScore(modifyScore);
+            subStageScoreModified = true;
+        }
+        if(getCurrentLevel().activeSubstage == null ){
+            subStageScoreModified = false;
+        }
+        reward.update();
+    }
+
+    public int changeScore(Score s){
+        Operator operator = s.getOperator();
+        int modifyAmount = score;
+        switch (operator){
+            case Plus -> modifyAmount += s.getValue();
+            case Minus -> modifyAmount -= s.getValue();
+            case Divide -> modifyAmount /= s.getValue();
+            case Multiply -> modifyAmount *= s.getValue();
+        }
+
+        return modifyAmount;
     }
 }

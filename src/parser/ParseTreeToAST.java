@@ -79,7 +79,7 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
         staticCheck.unMatchCreatedWithUsed(staticCheck.fireballIdsInStage, staticCheck.fireballs, "Fireball");
 
         // now that we have parsed all obstacles, render the objects in each stage and level
-        program.renderAllObjects();
+//        program.renderAllObjects();
         return program;
     }
 
