@@ -26,34 +26,72 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
         for (GameParser.LevelContext l : ctx.level()) {
             Level level = (Level) l.accept(this);
 
+<<<<<<< HEAD
+=======
+            // check duplicate declaration
+            staticCheck.duplicateDeclare(staticCheck.levelIds, level.getId(), "Level");
+
+>>>>>>> 34a437e (added static check)
             program.getLevels().put(level.getId(), level);
             // <static check add>
             staticCheck.levelIds.add(level.getId());
         }
+        // check if level id’s to be strictly increasing by 1
+        staticCheck.levelIdsIncreasingByOne();
 
         for (GameParser.SubstageContext s : CollectionUtils.emptyIfNull(ctx.substage())) {
             Substage substage = (Substage) s.accept(this);
 
+<<<<<<< HEAD
             program.getSubStages().put(substage.getId(), substage);
             // <static check add>
             staticCheck.subStages.add(substage.getId());
+=======
+            // check duplicate declaration
+            staticCheck.duplicateDeclare(staticCheck.substages, substage.getId(), "SubStage");
+
+            program.getSubStages().put(substage.getId(), substage);
+            // <static check add>
+            staticCheck.substages.add(substage.getId());
+>>>>>>> 34a437e (added static check)
         }
+        // check if check that sub stage ids declared inside “create level” each have a “create”
+        // statement.
+        staticCheck.unMatchCreatedWithUsed(staticCheck.subStageIdsInLevel, staticCheck.substages, "SubStage");
 
         for (GameParser.WallContext w : CollectionUtils.emptyIfNull(ctx.wall())) {
             Wall wall = (Wall) w.accept(this);
 
+<<<<<<< HEAD
+=======
+            // check duplicate declaration
+            staticCheck.duplicateDeclare(staticCheck.walls, wall.getId(), "Wall");
+
+>>>>>>> 34a437e (added static check)
             program.getWalls().put(wall.getId(), wall);
             // <static check add>
             staticCheck.walls.add(wall.getId());
         }
+        // check if check that wall ids declared inside “create level” & “create substage” each have a “create”
+        // statement.
+        staticCheck.unMatchCreatedWithUsed(staticCheck.wallIdsInStage, staticCheck.walls, "Wall");
 
         for (GameParser.FireballContext f : CollectionUtils.emptyIfNull(ctx.fireball())) {
             Fireball fireball = (Fireball) f.accept(this);
 
+<<<<<<< HEAD
+=======
+            // check duplicate declaration
+            staticCheck.duplicateDeclare(staticCheck.fireballs, fireball.getId(), "Fireball");
+
+>>>>>>> 34a437e (added static check)
             program.getFireballs().put(fireball.getId(), fireball);
             // <static check add>
             staticCheck.fireballs.add(fireball.getId());
         }
+        // check if check that wall ids declared inside “create level” & “create substage” each have a “create”
+        // statement.
+        staticCheck.unMatchCreatedWithUsed(staticCheck.fireballIdsInStage, staticCheck.fireballs, "Fireball");
 
         // now that we have parsed all obstacles, render the objects in each stage and level
 //        program.renderAllObjects();
@@ -80,6 +118,7 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
                 ((Ids) ctx.withFireballs().ids().accept(this)).getIds()
                 : Collections.emptyList();
         // <static check add>
+<<<<<<< HEAD
         Set<Integer> wallSet = new HashSet<>();
         Set<Integer> fbSet = new HashSet<>();
         for (Integer wallId: wallIds) {
@@ -89,6 +128,13 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
         for (Integer fbId: fireballIds) {
             staticCheck.fireballIdsInStage.add(fbId);
             staticCheck.hashAdd(fbSet, fbId, "Level", "Fireball");
+=======
+        for (Integer wallId: wallIds) {
+            staticCheck.wallIdsInStage.add(wallId);
+        }
+        for (Integer fbId: fireballIds) {
+            staticCheck.fireballIdsInStage.add(fbId);
+>>>>>>> 34a437e (added static check)
         }
 
         Map<Coordinate, Integer> coordinateToSubstageIdMap = new HashMap<>();
@@ -116,6 +162,7 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
                 ((Ids) ctx.withFireballs().ids().accept(this)).getIds()
                 : Collections.emptyList();
         // <static check add>
+<<<<<<< HEAD
         Set<Integer> wallSet = new HashSet<>();
         Set<Integer> fbSet = new HashSet<>();
         for (Integer wallId: wallIds) {
@@ -125,6 +172,13 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
         for (Integer fbId: fireballIds) {
             staticCheck.fireballIdsInStage.add(fbId);
             staticCheck.hashAdd(fbSet, fbId, "Level", "Fireball");
+=======
+        for (Integer wallId: wallIds) {
+            staticCheck.wallIdsInStage.add(wallId);
+        }
+        for (Integer fbId: fireballIds) {
+            staticCheck.fireballIdsInStage.add(fbId);
+>>>>>>> 34a437e (added static check)
         }
         return new Substage(id, speed, wallIds, fireballIds, score);
     }
