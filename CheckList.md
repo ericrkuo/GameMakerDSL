@@ -5,7 +5,7 @@
   For example, check that wall ids declared inside “create level” each have a “create wall” statement. Same for 
   substage and fireball
 - no duplicate declaration
-  
+
 ## Dynamic Check List
 - Check the integer overflow (e.g. ids, coordinates, speed)
   - Game width: 100 - 2000

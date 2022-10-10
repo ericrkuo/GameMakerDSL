@@ -20,7 +20,6 @@ public class StaticCheck {
     public StaticCheck() {
         levelIds = new HashSet<>();
         substages = new HashSet<>();
-
         subStageIdsInLevel = new HashSet<>();
         wallIdsInStage = new HashSet<>();
         fireballIdsInStage = new HashSet<>();
