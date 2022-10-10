@@ -38,7 +38,7 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
         }
 
         // now that we have parsed all obstacles, render the objects in each stage and level
-        program.renderAllObjects();
+//        program.renderAllObjects();
         return program;
     }
 
