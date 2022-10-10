@@ -6,6 +6,7 @@ public class Constant {
     // this is different from the width the user sets, it is the window frame size
     public final static int GAME_WIDTH = 1000;
     public final static int CHARACTER_SPEED = 6;
+    public final static String FONT = "Yu Gothic UI";
 
     // wall constants
     public final static int GAME_UNIT = 50;

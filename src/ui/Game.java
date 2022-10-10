@@ -130,26 +130,27 @@ public class Game {
         return character;
     }
 
-    public void updateScore(){
-        if(reward.getCounter() == reward.getDistance()){
+    public void updateScore() {
+        if (reward.getCounter() == reward.getDistance()) {
             score += reward.getValue();
         }
 
-        if(getCurrentLevel().activeSubstage != null && !subStageScoreModified){
+        if (getCurrentLevel().activeSubstage != null && !subStageScoreModified) {
             Score modifyScore = getCurrentLevel().activeSubstage.getScore();
             score = changeScore(modifyScore);
             subStageScoreModified = true;
         }
-        if(getCurrentLevel().activeSubstage == null ){
+
+        if (getCurrentLevel().activeSubstage == null) {
             subStageScoreModified = false;
         }
         reward.update();
     }
 
-    public int changeScore(Score s){
+    public int changeScore(Score s) {
         Operator operator = s.getOperator();
         int modifyAmount = score;
-        switch (operator){
+        switch (operator) {
             case Plus -> modifyAmount += s.getValue();
             case Minus -> modifyAmount -= s.getValue();
             case Divide -> modifyAmount /= s.getValue();
