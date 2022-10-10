@@ -130,31 +130,18 @@ public class Game {
         return character;
     }
 
-<<<<<<< HEAD
     public void updateScore() {
         if (reward.getCounter() == reward.getDistance()) {
             score += reward.getValue();
         }
 
         if (getCurrentLevel().activeSubstage != null && !subStageScoreModified) {
-=======
-    public void updateScore(){
-        if(reward.getCounter() == reward.getDistance()){
-            score += reward.getValue();
-        }
-
-        if(getCurrentLevel().activeSubstage != null && !subStageScoreModified){
->>>>>>> 2148261 (added score tracker)
             Score modifyScore = getCurrentLevel().activeSubstage.getScore();
             score = changeScore(modifyScore);
             subStageScoreModified = true;
         }
-<<<<<<< HEAD
 
         if (getCurrentLevel().activeSubstage == null) {
-=======
-        if(getCurrentLevel().activeSubstage == null ){
->>>>>>> 2148261 (added score tracker)
             subStageScoreModified = false;
         }
         reward.update();
