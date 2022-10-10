@@ -30,19 +30,14 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
             // <static check add>
             staticCheck.levelIds.add(level.getId());
         }
-        // check if level id’s to be strictly increasing by 1
-        staticCheck.levelIdsIncreasingByOne();
 
         for (GameParser.SubstageContext s : CollectionUtils.emptyIfNull(ctx.substage())) {
             Substage substage = (Substage) s.accept(this);
 
             program.getSubStages().put(substage.getId(), substage);
             // <static check add>
-            staticCheck.substages.add(substage.getId());
+            staticCheck.subStages.add(substage.getId());
         }
-        // check if check that sub stage ids declared inside “create level” each have a “create”
-        // statement.
-        staticCheck.unMatchCreatedWithUsed(staticCheck.subStageIdsInLevel, staticCheck.substages, "SubStage");
 
         for (GameParser.WallContext w : CollectionUtils.emptyIfNull(ctx.wall())) {
             Wall wall = (Wall) w.accept(this);
@@ -51,9 +46,6 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
             // <static check add>
             staticCheck.walls.add(wall.getId());
         }
-        // check if check that wall ids declared inside “create level” & “create substage” each have a “create”
-        // statement.
-        staticCheck.unMatchCreatedWithUsed(staticCheck.wallIdsInStage, staticCheck.walls, "Wall");
 
         for (GameParser.FireballContext f : CollectionUtils.emptyIfNull(ctx.fireball())) {
             Fireball fireball = (Fireball) f.accept(this);
@@ -62,18 +54,10 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
             // <static check add>
             staticCheck.fireballs.add(fireball.getId());
         }
-        // check if check that wall ids declared inside “create level” & “create substage” each have a “create”
-        // statement.
-        staticCheck.unMatchCreatedWithUsed(staticCheck.fireballIdsInStage, staticCheck.fireballs, "Fireball");
-
-        // check duplicate declaration
-        staticCheck.duplicateDeclare(staticCheck.levelIds, "Level");
-        staticCheck.duplicateDeclare(staticCheck.substages, "SubStage");
-        staticCheck.duplicateDeclare(staticCheck.walls, "Wall");
-        staticCheck.duplicateDeclare(staticCheck.fireballs, "Fireball");
 
         // now that we have parsed all obstacles, render the objects in each stage and level
 //        program.renderAllObjects();
+        staticCheck.check(program);
         return program;
     }
 

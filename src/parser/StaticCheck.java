@@ -1,5 +1,8 @@
 package parser;
 
+import ast.Level;
+import ast.Program;
+import ast.Substage;
 import org.antlr.v4.runtime.misc.ParseCancellationException;
 
 import java.util.ArrayList;
@@ -8,25 +11,14 @@ import java.util.List;
 import java.util.Set;
 
 public class StaticCheck {
-    public List<Integer> levelIds;
-    public Set<Integer> subStageIdsInLevel;
-    public List<Integer> substages;
-    public Set<Integer> wallIdsInStage;
-    public Set<Integer> fireballIdsInStage;
+    List<Integer> levelIds = new ArrayList<>();
+    List<Integer> subStages = new ArrayList<>();
+    List<Integer> walls = new ArrayList<>();
+    List<Integer> fireballs = new ArrayList<>();
 
-    public List<Integer> walls;
-    public List<Integer> fireballs;
-
-    public StaticCheck() {levelIds = new ArrayList<>();
-        substages = new ArrayList<>();
-
-        subStageIdsInLevel = new HashSet<>();
-        wallIdsInStage = new HashSet<>();
-        fireballIdsInStage = new HashSet<>();
-
-        walls = new ArrayList<>();
-        fireballs = new ArrayList<>();
-    }
+    Set<Integer> subStageIdsInLevel = new HashSet<>();
+    Set<Integer> wallIdsInStage = new HashSet<>();
+    Set<Integer> fireballIdsInStage = new HashSet<>();
 
     public void hashAdd(Set<Integer> set, Integer target, String parentName, String objectName) {
         if (set.contains(target)) {
@@ -58,11 +50,28 @@ public class StaticCheck {
         }
     }
 
-    public void levelIdsIncreasingByOne() {
+    public void levelIdsIncreasingByOne(Set<Integer> levelIds) {
         for (Integer i = 1; i <= levelIds.size(); i++) {
             if (!levelIds.contains(i)) {
                 throw new ParseCancellationException("level id should strictly increase by 1");
             }
         }
+    }
+
+    public void check(Program program) {
+        // check duplicate declaration
+        this.duplicateDeclare(levelIds, "Level");
+        this.duplicateDeclare(subStages, "SubStage");
+        this.duplicateDeclare(walls, "Wall");
+        this.duplicateDeclare(fireballs, "Fireball");
+
+        // check if level id’s to be strictly increasing by 1
+        this.levelIdsIncreasingByOne(program.getLevels().keySet());
+
+        // check if check that sub stage ids declared inside “create level” each have a “create”
+        // statement.
+        this.unMatchCreatedWithUsed(this.subStageIdsInLevel, subStages, "SubStage");
+        this.unMatchCreatedWithUsed(this.wallIdsInStage, walls, "Wall");
+        this.unMatchCreatedWithUsed(this.fireballIdsInStage, fireballs, "Fireball");
     }
 }
