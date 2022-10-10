@@ -26,9 +26,6 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
         for (GameParser.LevelContext l : ctx.level()) {
             Level level = (Level) l.accept(this);
 
-            // check duplicate declaration
-            staticCheck.duplicateDeclare(staticCheck.levelIds, level.getId(), "Level");
-
             program.getLevels().put(level.getId(), level);
             // <static check add>
             staticCheck.levelIds.add(level.getId());
@@ -38,9 +35,6 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
 
         for (GameParser.SubstageContext s : CollectionUtils.emptyIfNull(ctx.substage())) {
             Substage substage = (Substage) s.accept(this);
-
-            // check duplicate declaration
-            staticCheck.duplicateDeclare(staticCheck.substages, substage.getId(), "SubStage");
 
             program.getSubStages().put(substage.getId(), substage);
             // <static check add>
@@ -53,9 +47,6 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
         for (GameParser.WallContext w : CollectionUtils.emptyIfNull(ctx.wall())) {
             Wall wall = (Wall) w.accept(this);
 
-            // check duplicate declaration
-            staticCheck.duplicateDeclare(staticCheck.walls, wall.getId(), "Wall");
-
             program.getWalls().put(wall.getId(), wall);
             // <static check add>
             staticCheck.walls.add(wall.getId());
@@ -67,9 +58,6 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
         for (GameParser.FireballContext f : CollectionUtils.emptyIfNull(ctx.fireball())) {
             Fireball fireball = (Fireball) f.accept(this);
 
-            // check duplicate declaration
-            staticCheck.duplicateDeclare(staticCheck.fireballs, fireball.getId(), "Fireball");
-
             program.getFireballs().put(fireball.getId(), fireball);
             // <static check add>
             staticCheck.fireballs.add(fireball.getId());
@@ -77,6 +65,12 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
         // check if check that wall ids declared inside “create level” & “create substage” each have a “create”
         // statement.
         staticCheck.unMatchCreatedWithUsed(staticCheck.fireballIdsInStage, staticCheck.fireballs, "Fireball");
+
+        // check duplicate declaration
+        staticCheck.duplicateDeclare(staticCheck.levelIds, "Level");
+        staticCheck.duplicateDeclare(staticCheck.substages, "SubStage");
+        staticCheck.duplicateDeclare(staticCheck.walls, "Wall");
+        staticCheck.duplicateDeclare(staticCheck.fireballs, "Fireball");
 
         // now that we have parsed all obstacles, render the objects in each stage and level
 //        program.renderAllObjects();
@@ -102,11 +96,15 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
                 ((Ids) ctx.withFireballs().ids().accept(this)).getIds()
                 : Collections.emptyList();
         // <static check add>
+        Set<Integer> wallSet = new HashSet<>();
+        Set<Integer> fbSet = new HashSet<>();
         for (Integer wallId: wallIds) {
             staticCheck.wallIdsInStage.add(wallId);
+            staticCheck.hashAdd(wallSet, wallId, "Level", "Wall");
         }
         for (Integer fbId: fireballIds) {
             staticCheck.fireballIdsInStage.add(fbId);
+            staticCheck.hashAdd(fbSet, fbId, "Level", "Fireball");
         }
 
         Map<Coordinate, Integer> coordinateToSubstageIdMap = new HashMap<>();
@@ -134,11 +132,15 @@ public class ParseTreeToAST extends GameParserBaseVisitor<Node> {
                 ((Ids) ctx.withFireballs().ids().accept(this)).getIds()
                 : Collections.emptyList();
         // <static check add>
+        Set<Integer> wallSet = new HashSet<>();
+        Set<Integer> fbSet = new HashSet<>();
         for (Integer wallId: wallIds) {
             staticCheck.wallIdsInStage.add(wallId);
+            staticCheck.hashAdd(wallSet, wallId, "Level", "Wall");
         }
         for (Integer fbId: fireballIds) {
             staticCheck.fireballIdsInStage.add(fbId);
+            staticCheck.hashAdd(fbSet, fbId, "Level", "Fireball");
         }
         return new Substage(id, speed, wallIds, fireballIds, score);
     }
