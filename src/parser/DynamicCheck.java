@@ -12,21 +12,21 @@ import static constants.Constant.GAME_UNIT;
 public class DynamicCheck {
     private Program program;
 
-    public final Pair<Integer, Integer> gameWidth = new Pair<>(100, 2000);
+    public final Pair<Integer, Integer> gameWidthRange = new Pair<>(100, Integer.MAX_VALUE);
 
-    public final Pair<Integer, Integer> rewardValue = new Pair<>(5, 100);
-    public final Pair<Integer, Integer> rewardDistance = new Pair<>(1, 10);
-    public final Pair<Integer, Integer> speed = new Pair<>(1, 10);
-    public Pair<Integer, Integer> coordinateX;
-    public final Pair<Integer, Integer> coordinateY = new Pair<>(0, 450);
-    public final Pair<Integer, Integer> score = new Pair<>(1, 1000);
-    public final Pair<Integer, Integer> wallHeight = new Pair<>(1 * GAME_UNIT, 6 * GAME_UNIT);
-    public final Pair<Integer, Integer> wallWidth = new Pair<>(1 * GAME_UNIT, 6 * GAME_UNIT);
-    public final Pair<Integer, Integer> triggerDistance = new Pair<>(10, 100);
+    public final Pair<Integer, Integer> rewardValueRange = new Pair<>(5, Integer.MAX_VALUE);
+    public final Pair<Integer, Integer> rewardDistanceRange = new Pair<>(1, Integer.MAX_VALUE);
+    public final Pair<Integer, Integer> speedRange = new Pair<>(1, 10);
+    public Pair<Integer, Integer> coordinateXRange;
+    public final Pair<Integer, Integer> coordinateYRange = new Pair<>(0, 450);
+    public final Pair<Integer, Integer> scoreRange = new Pair<>(1, 1000);
+    public final Pair<Integer, Integer> wallHeightRange = new Pair<>(1 * GAME_UNIT, 6 * GAME_UNIT);
+    public final Pair<Integer, Integer> wallWidthRange = new Pair<>(1 * GAME_UNIT, 6 * GAME_UNIT);
+    public final Pair<Integer, Integer> triggerDistanceRange = new Pair<>(10, 100);
 
     public DynamicCheck(Program program) {
         this.program = program;
-        coordinateX = new Pair<>(0, program.getGame().getWidth());
+        coordinateXRange = new Pair<>(0, program.getGame().getWidth());
     }
 
     public void integerOverflow(Integer target, Pair<Integer, Integer> range, String name) {
@@ -46,30 +46,30 @@ public class DynamicCheck {
     public void check() {
         // game object
         Game game = program.getGame();
-        integerOverflow(game.getWidth(), gameWidth, "Game Width");
-        integerOverflow(game.getReward().getValue(), rewardValue, "Reward Value");
-        integerOverflow(game.getReward().getDistance(), rewardDistance, "Reward Distance");
+        integerOverflow(game.getWidth(), gameWidthRange, "Game Width");
+        integerOverflow(game.getReward().getValue(), rewardValueRange, "Reward Value");
+        integerOverflow(game.getReward().getDistance(), rewardDistanceRange, "Reward Distance");
         // level object
         for (Level l: program.getLevels().values()) {
-            integerOverflow(l.getSpeed().getValue(), speed, "Speed");
+            integerOverflow(l.getSpeed().getValue(), speedRange, "Speed");
             for (Coordinate c: l.getSubstageCoordinates()) {
-                integerOverflow(c.getX(), coordinateX, "X Coordinate");
-                integerOverflow(c.getY(), coordinateY, "Y Coordinate");
+                integerOverflow(c.getX(), coordinateXRange, "X Coordinate");
+                integerOverflow(c.getY(), coordinateYRange, "Y Coordinate");
             }
         }
         // substage object
         for (Substage sb: program.getSubStages().values()) {
-            integerOverflow(sb.getSpeed().getValue(), speed, "Speed");
-            integerOverflow(sb.getScore().getValue(), score, "Score");
+            integerOverflow(sb.getSpeed().getValue(), speedRange, "Speed");
+            integerOverflow(sb.getScore().getValue(), scoreRange, "Score");
         }
         // wall object
         for (Wall w: program.getWalls().values()) {
-            integerOverflow(w.getWidth(), wallWidth, "Wall Width");
-            integerOverflow(w.getHeight(), wallHeight, "Wall Height");
+            integerOverflow(w.getWidth(), wallWidthRange, "Wall Width");
+            integerOverflow(w.getHeight(), wallHeightRange, "Wall Height");
             Set<Coordinate> coordinateSet = new HashSet<>();
             for (Coordinate c: w.getCoordinates()) {
-                integerOverflow(c.getX(), coordinateX, "X Coordinate");
-                integerOverflow(c.getY(), coordinateY, "Y Coordinate");
+                integerOverflow(c.getX(), coordinateXRange, "X Coordinate");
+                integerOverflow(c.getY(), coordinateYRange, "Y Coordinate");
                 // check the duplicate coordinate with the same wall
                 duplicateCoordinate(coordinateSet, c);
                 coordinateSet.add(c);
@@ -77,12 +77,12 @@ public class DynamicCheck {
         }
         // fireball object
         for (Fireball fb: program.getFireballs().values()) {
-            integerOverflow(fb.getSpeed().getValue(), speed, "Speed");
-            integerOverflow(fb.getY_coordinate(), coordinateY, "Y Coordinate");
+            integerOverflow(fb.getSpeed().getValue(), speedRange, "Speed");
+            integerOverflow(fb.getY_coordinate(), coordinateYRange, "Y Coordinate");
             if (fb.getTrigger().getTriggerFlavour() == TriggerFlavour.Static) {
-                integerOverflow(fb.getCounter(), coordinateX, "X Coordinate");
+                integerOverflow(fb.getCounter(), coordinateXRange, "X Coordinate");
             } else {
-                integerOverflow(fb.getCounter(), triggerDistance, "Trigger Distance");
+                integerOverflow(fb.getCounter(), triggerDistanceRange, "Trigger Distance");
             }
         }
 
