@@ -53,6 +53,11 @@ public class GamePanel extends JPanel implements Runnable {
             g2D.setFont(new Font(FONT, Font.PLAIN, 20));
             g2D.drawString("Press R to restart", 150, 240);
         }
+        if(game.isCleared){
+            renderFinish(g2D);
+            g2D.setFont(new Font(FONT, Font.PLAIN, 50));
+            g2D.drawString("Total Score: " + Integer.toString(game.score), GAME_WIDTH/2, GAME_HEIGHT-50);
+        }
     }
 
     private void renderBackground(Graphics2D g2D, Level currentLevel) {
@@ -69,6 +74,12 @@ public class GamePanel extends JPanel implements Runnable {
                 g2D.drawImage(image, x, y, this);
             }
         }
+    }
+
+    private void renderFinish(Graphics2D g2D) {
+        BufferedImage image = Util.loadImage("assets/cleared.png");
+        image = Util.scaleImage(GAME_WIDTH, GAME_HEIGHT, image);
+        g2D.drawImage(image, 0, 0, this);
     }
 
     public void run() {

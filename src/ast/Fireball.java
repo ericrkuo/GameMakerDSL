@@ -33,7 +33,7 @@ public class Fireball extends Obstacle {
         this.y = y_coordinate;
         this.img = image;
         this.height = img.getHeight();
-        this.width = img.getWidth();
+        this.width = img.getWidth()-20;
     }
 
     public Integer getId() {

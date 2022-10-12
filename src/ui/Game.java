@@ -20,6 +20,7 @@ public class Game {
     public int score;
     public Reward reward;
     public boolean subStageScoreModified;
+    public boolean isCleared;
     public Boolean isGameOver;
     public Boolean isGameStarted;
     public int speed;
@@ -27,7 +28,7 @@ public class Game {
 
     public int activeLevelIndex;
     private final CollisionVisitor<Game, Boolean> collisionDetector;
-    private final Program program;
+    public final Program program;
 
     public Game(Program program) {
         this.program = program;
@@ -65,6 +66,9 @@ public class Game {
             return;
 
         if (isGameOver)
+            return;
+
+        if(isCleared)
             return;
 
         checkForCollisions();

@@ -44,7 +44,11 @@ public class CollisionDetector implements CollisionVisitor<Game, Boolean> {
                     game.getCharacter().y = game.yPosCharacterReturnsTo;
                     game.getCharacter().update(0);
                 } else {
-                    game.activeLevelIndex++;
+                    if(game.activeLevelIndex == game.program.getLevels().size()){
+                        game.isCleared = true;
+                    } else {
+                        game.activeLevelIndex++;
+                    }
                 }
             }
         });
