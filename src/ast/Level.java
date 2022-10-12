@@ -7,6 +7,7 @@ import ui.Portal;
 import java.awt.*;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * A level maintains a map of coordinates to substage location ids.
@@ -68,5 +69,9 @@ public class Level extends Stage {
 
     public Level copy() {
         return new Level(this.getId(), this.getSpeed(), this.getWallIDs(), this.getFireballIDs(), this.coordinateToSubstageIdMap);
+    }
+
+    public Set<Coordinate> getSubstageCoordinates() {
+        return this.coordinateToSubstageIdMap.keySet();
     }
 }
