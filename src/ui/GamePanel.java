@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 import static constants.Constant.*;
 
@@ -16,6 +17,12 @@ public class GamePanel extends JPanel implements Runnable {
     private final Program program;
 
     public GamePanel(Program program) {
+        try {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/Retro Gaming.ttf")));
+        } catch (Exception e) {
+            System.out.println("Couldn't register font");
+        }
         this.program = program;
         game = new Game(program);
         new Thread(this).start();
@@ -33,11 +40,11 @@ public class GamePanel extends JPanel implements Runnable {
         game.getCharacter().render(g);
 
         Graphics2D g2D = (Graphics2D) g;
-        g2D.setColor(Color.BLACK);
+        g2D.setColor(Color.WHITE);
 
         if (!game.isGameStarted) {
             g2D.setFont(new Font(FONT, Font.PLAIN, 20));
-            g2D.drawString("Press SPACE to start", 150, 240);
+            g2D.drawString("Press SPACE to start", 115, GAME_HEIGHT / 2 - 10);
         } else {
             // draw score
             // right-text alignment http://www.java2s.com/ref/java/java-awt-graphics2d-draw-string-right-alignment.html

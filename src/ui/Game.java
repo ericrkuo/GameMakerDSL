@@ -44,6 +44,7 @@ public class Game {
         paused = false;
         isGameStarted = false;
         isGameOver = false;
+        isCleared = false;
 
         score = 0;
         pauseDelay = 0;
@@ -115,14 +116,18 @@ public class Game {
                 }
             }
         }
-        if (character.y > (GAME_HEIGHT - 60)) {
+
+        int groundBound = GAME_HEIGHT - 38 - character.height;
+        int ceilingBound = 5;
+
+        if (character.y > groundBound) {
             isGameOver = true;
-            character.y = GAME_HEIGHT - 60;
+            character.y = groundBound;
         }
 
-        if (character.y < 0) {
+        if (character.y < ceilingBound) {
             isGameOver = true;
-            character.y = 0;
+            character.y = ceilingBound;
         }
     }
 

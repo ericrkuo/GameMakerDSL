@@ -10,19 +10,18 @@ import java.util.Set;
 import static constants.Constant.GAME_UNIT;
 
 public class DynamicCheck {
-    private Program program;
+    private final Program program;
 
     public final Pair<Integer, Integer> gameWidthRange = new Pair<>(100, Integer.MAX_VALUE);
-
     public final Pair<Integer, Integer> rewardValueRange = new Pair<>(5, Integer.MAX_VALUE);
     public final Pair<Integer, Integer> rewardDistanceRange = new Pair<>(1, Integer.MAX_VALUE);
     public final Pair<Integer, Integer> speedRange = new Pair<>(1, 10);
-    public Pair<Integer, Integer> coordinateXRange;
     public final Pair<Integer, Integer> coordinateYRange = new Pair<>(0, 450);
     public final Pair<Integer, Integer> scoreRange = new Pair<>(1, 1000);
-    public final Pair<Integer, Integer> wallHeightRange = new Pair<>(1 * GAME_UNIT, 6 * GAME_UNIT);
-    public final Pair<Integer, Integer> wallWidthRange = new Pair<>(1 * GAME_UNIT, 6 * GAME_UNIT);
+    public final Pair<Integer, Integer> wallHeightRange = new Pair<>(GAME_UNIT, 10 * GAME_UNIT);
+    public final Pair<Integer, Integer> wallWidthRange = new Pair<>(GAME_UNIT, Integer.MAX_VALUE);
     public final Pair<Integer, Integer> triggerDistanceRange = new Pair<>(10, 100);
+    public Pair<Integer, Integer> coordinateXRange;
 
     public DynamicCheck(Program program) {
         this.program = program;
