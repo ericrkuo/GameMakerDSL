@@ -8,6 +8,7 @@ public class App {
     public static void createGame(Program program) {
         System.out.println("Launching game...");
         JFrame frame = new JFrame();
+        frame.setTitle(program.getGame().getName());
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
