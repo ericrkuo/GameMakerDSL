@@ -16,7 +16,7 @@ public class Portal extends Obstacle {
         y = coordinate.getY();
         img = image;
         height = img.getHeight();
-        width = img.getWidth();
+        width = img.getWidth() - 20;
     }
 
     @Override

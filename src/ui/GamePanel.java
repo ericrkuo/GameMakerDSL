@@ -39,6 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
             g2D.setFont(new Font(FONT, Font.PLAIN, 20));
             g2D.drawString("Press SPACE to start", 150, 240);
         } else {
+            // draw score
             // right-text alignment http://www.java2s.com/ref/java/java-awt-graphics2d-draw-string-right-alignment.html
             String txt = Integer.toString(game.score);
             Font font = new Font(FONT, Font.PLAIN, 20);
@@ -47,6 +48,16 @@ public class GamePanel extends JPanel implements Runnable {
             g2D.setFont(font);
             int x = (getParent().getWidth() - (int) bounds1.getWidth() - 10);
             g2D.drawString(txt, x, 25);
+
+            // draw current level (and substage if applicable)
+            String level = String.format("Level %d", game.getCurrentLevel().getId());
+            if (game.getCurrentLevel().activeSubstage != null) {
+                level += "-" + game.getCurrentLevel().activeSubstage.getId();
+            }
+
+            bounds1 = font.getStringBounds(level, fontRenderCtx);
+            x = (getParent().getWidth() - (int) bounds1.getWidth() - 10);
+            g2D.drawString(level, x, 50);
         }
 
         if (game.isGameOver) {
@@ -55,8 +66,14 @@ public class GamePanel extends JPanel implements Runnable {
         }
         if(game.isCleared){
             renderFinish(g2D);
-            g2D.setFont(new Font(FONT, Font.PLAIN, 50));
-            g2D.drawString("Total Score: " + Integer.toString(game.score), GAME_WIDTH/2, GAME_HEIGHT-50);
+            g2D.setColor(Color.WHITE);
+            Font font = new Font(FONT, Font.PLAIN, 30);
+            String txt = "Total Score: " + game.score;
+            FontRenderContext fontRenderCtx = g2D.getFontRenderContext();
+            Rectangle2D bounds1 = font.getStringBounds(txt, fontRenderCtx);
+            g2D.setFont(font);
+            int x = getParent().getWidth()/2 - (int) bounds1.getWidth()/2;
+            g2D.drawString(txt, x, GAME_HEIGHT-50);
         }
     }
 
@@ -78,7 +95,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private void renderFinish(Graphics2D g2D) {
         BufferedImage image = Util.loadImage("assets/cleared.png");
-        image = Util.scaleImage(GAME_WIDTH, GAME_HEIGHT, image);
+        image = Util.scaleImage(GAME_WIDTH, GAME_HEIGHT+115, image);
         g2D.drawImage(image, 0, 0, this);
     }
 
