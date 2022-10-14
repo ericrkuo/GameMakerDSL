@@ -24,13 +24,13 @@ public class Fireball extends Obstacle {
     public Fireball(Integer id, Speed speed, Integer y_coordinate, Trigger trigger) {
         this.id = id;
         this.speed = speed;
-        this.y_coordinate = y_coordinate;
+        this.y_coordinate = y_coordinate * GAME_UNIT;
         this.trigger = trigger;
         this.counter = trigger.getValue();
 
         // parent properties
         this.x = trigger.getTriggerFlavour() == TriggerFlavour.Static ? trigger.getValue() : GAME_WIDTH;
-        this.y = y_coordinate;
+        this.y = this.y_coordinate;
         this.img = image;
         this.height = img.getHeight();
         this.width = 10;
@@ -70,6 +70,6 @@ public class Fireball extends Obstacle {
     }
 
     public Fireball copy() {
-        return new Fireball(this.id, this.speed, this.y_coordinate, this.trigger);
+        return new Fireball(this.id, this.speed, this.y_coordinate / GAME_UNIT, this.trigger);
     }
 }

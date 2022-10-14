@@ -42,16 +42,16 @@ public class StaticCheck {
         Set<Integer> createdSet = new HashSet<>(created);
         for (Integer id: used) {
             if (!createdSet.contains(id)) {
-                throw new ParseCancellationException(String.format("Used object is not created (Object: %s, Id: %d)",
+                throw new ParseCancellationException(String.format("Referenced object has not been created (Object: %s, Id: %d)",
                         objectName, id));
             }
         }
     }
 
     public void levelIdsIncreasingByOne(Set<Integer> levelIds) {
-        for (Integer i = 1; i <= levelIds.size(); i++) {
+        for (int i = 1; i <= levelIds.size(); i++) {
             if (!levelIds.contains(i)) {
-                throw new ParseCancellationException("level id should strictly increase by 1");
+                throw new ParseCancellationException("Level id should strictly increase by 1");
             }
         }
     }

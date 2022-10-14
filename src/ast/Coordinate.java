@@ -2,6 +2,8 @@ package ast;
 
 import java.util.Objects;
 
+import static constants.Constant.GAME_UNIT;
+
 /**
  * Represents an (x,y) coordinate pair. Used to specify locations of walls and substages.
  */
@@ -10,8 +12,8 @@ public class Coordinate extends Node {
     private final Integer y;
 
     public Coordinate(Integer x, Integer y) {
-        this.x = x;
-        this.y = y;
+        this.x = x * GAME_UNIT;
+        this.y = y * GAME_UNIT;
     }
 
     public Integer getX() {
