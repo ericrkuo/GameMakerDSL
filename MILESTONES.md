@@ -158,3 +158,43 @@ We’ll be conducting our final user study next Wednesday and we're aiming to fi
 
 ## Notes of any important changes/feedback from TA discussion
 Jifeng said we're on track, and encouraged us to visit his office hours or contact him if we have any questions regarding to connecting AST with UI, final uesr studies, or in general, any concerns!
+
+# Milestone 5
+
+## Status of implementation
+Implemented static checks and dynamic checks
+- https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/pull/19 
+
+Completed AST design
+- https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/pull/9 
+
+Finished UI and integrated it with AST
+- https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/pull/16 
+
+Conducted user studies (see below for results)
+
+## Result of Final User Study
+We conducted our final user study this Thursday
+- [Here](https://docs.google.com/document/d/1sPjLjNMnLESEZp0rIRhdijkrM3di5Ryl8ud1PNJVrLE/edit#bookmark=id.adboyl7tysbn) is the the result / feedback of final user study
+
+## Any changes to the language design
+
+- We improved the value in our DSL to be consistant
+  - Coordinate was in pixel but width of wall was in game unit, so make its value in game unit as well
+  - https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/pull/20
+
+
+## Notes of any important feedback from TA discussion
+Jifeng said our project is going well, there is no critical issues! He gave us the tips for making a video (e.g. what/how we show our project in attractive way for listners). Also, suggested to put our project's detail on README for people with low context to understand.
+
+## Planned timeline for the remaining days
+
+We have the following tasks to do,
+- Polish our MILESTONES.md with more details to help professor and TAs grade
+- Polish up our code
+  - Quick change for coordinates and game units to be consistent - (should just change Coordinate class to multiply by 50, fix static check too
+- Polish up our input.txt for more complex level and stage designs
+- Create draft script => Record video for our project
+
+And our timeline is [here](https://docs.google.com/document/d/1sPjLjNMnLESEZp0rIRhdijkrM3di5Ryl8ud1PNJVrLE/edit#bookmark=kix.ambtxxky84t4)
+
