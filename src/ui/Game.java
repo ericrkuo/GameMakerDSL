@@ -10,6 +10,7 @@ import libs.RenderableObject;
 import java.awt.event.KeyEvent;
 
 import static constants.Constant.GAME_HEIGHT;
+import static constants.Constant.REWARD_DISTANCE;
 
 public class Game {
     private Boolean paused;
@@ -140,8 +141,8 @@ public class Game {
     }
 
     public void updateScore() {
-        if (reward.getCounter() == reward.getDistance()) {
-            score += reward.getValue();
+        if (reward.getCounter() == REWARD_DISTANCE) {
+            score += reward.getValueNormalized();
         }
 
         if (getCurrentLevel().activeSubstage != null && !subStageScoreModified) {

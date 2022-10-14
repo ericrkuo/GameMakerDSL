@@ -7,6 +7,7 @@ public class Constant {
     public final static int GAME_WIDTH = 1000;
     public final static int CHARACTER_SPEED = 6;
     public final static String FONT = "Retro Gaming";
+    public final static int REWARD_DISTANCE = 5;
 
     // wall constants
     public final static int GAME_UNIT = 50;

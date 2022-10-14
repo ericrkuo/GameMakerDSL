@@ -1,7 +1,7 @@
 create a game
   called MyGame
-  of width 1200
-  reward 50 every 5 units traveled
+  of width 24
+  reward 50 every 1 units traveled
 
 create level 1
   with speed 3
@@ -35,15 +35,15 @@ create substage 3
   score * 3
 
 create walls 1
-  of height 5 and width 1
-  at (6,6)
+  of height 1 and width 1
+  at (23, 0)
 
 create walls 2
   of height 1 and width 3
   at (0, 0), (8, 2), (16, 8)
 
 create fireball 1
-  trigger every 50 units
+  trigger every 1 units
   at y=3
   with speed 2
 
@@ -58,6 +58,6 @@ create fireball 3
   with speed 1
 
 create fireball 4
-  trigger every 100 units
+  trigger every 1 units
   at y=8
   with speed 3

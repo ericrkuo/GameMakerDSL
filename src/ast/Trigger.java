@@ -2,6 +2,8 @@ package ast;
 
 import enums.TriggerFlavour;
 
+import static constants.Constant.GAME_UNIT;
+
 public class Trigger extends Node {
     /**
      * Value depends on the flavour.
@@ -12,7 +14,7 @@ public class Trigger extends Node {
     private final TriggerFlavour triggerFlavour;
 
     public Trigger(Integer value, TriggerFlavour triggerFlavour) {
-        this.value = value;
+        this.value = value * GAME_UNIT;
         this.triggerFlavour = triggerFlavour;
     }
 

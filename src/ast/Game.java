@@ -1,5 +1,7 @@
 package ast;
 
+import static constants.Constant.GAME_UNIT;
+
 /**
  * The configuration of our game which includes the name, width of each level/substage, and the reward system.
  */
@@ -10,7 +12,7 @@ public class Game extends Node {
 
     public Game(String name, Integer width, Reward reward) {
         this.name = name;
-        this.width = width;
+        this.width = width * GAME_UNIT;
         this.reward = reward;
     }
 
