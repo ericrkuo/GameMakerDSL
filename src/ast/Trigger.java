@@ -24,5 +24,3 @@ public class Trigger extends Node {
         return triggerFlavour;
     }
 }
-
-

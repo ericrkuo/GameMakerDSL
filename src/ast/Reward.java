@@ -6,6 +6,7 @@ package ast;
 public class Reward extends Node {
     private final Integer value;
     private final Integer distance;
+    private int counter;
 
     public Reward(Integer value, Integer distance) {
         this.value = value;
@@ -18,5 +19,13 @@ public class Reward extends Node {
 
     public Integer getDistance() {
         return distance;
+    }
+
+    public int getCounter() { return counter; }
+    public void update(){
+        if(counter == distance){
+            counter = 0;
+        }
+        counter++;
     }
 }
