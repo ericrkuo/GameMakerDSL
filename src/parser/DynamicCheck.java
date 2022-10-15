@@ -17,7 +17,7 @@ public class DynamicCheck {
     public final Pair<Integer, Integer> rewardDistanceRange = new Pair<>(1, Integer.MAX_VALUE);
     public final Pair<Integer, Integer> speedRange = new Pair<>(1, 10);
     public final Pair<Integer, Integer> coordinateYRange = new Pair<>(0, 9); // 0-based indexing => 10 walls
-    public final Pair<Integer, Integer> scoreRange = new Pair<>(1, 1000);
+    public final Pair<Integer, Integer> scoreRange = new Pair<>(0, 1000);
     public final Pair<Integer, Integer> wallHeightRange = new Pair<>(1, 10 ); // 1-based indexing -> 10 walls
     public final Pair<Integer, Integer> wallWidthRange = new Pair<>(1, Integer.MAX_VALUE);
     public final Pair<Integer, Integer> triggerDistanceRange = new Pair<>(1, 10);
