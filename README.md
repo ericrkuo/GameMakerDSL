@@ -2,10 +2,13 @@
 
 ## Running our project
 1. First, import all the required libraries for our project.
+    - In IntelliJ Idea, navigate to `File > Project Structure > Libraries`
+    - Add all the `.jar`. files inside [lib](lib)
     - ![image](https://media.github.students.cs.ubc.ca/user/1272/files/b959a973-dfb7-4b20-8aa1-1e2f7f761aeb)
-    - This can be done by importing all the `.jar`. files inside [lib](lib)
 2. Generate all ANTLR files inside [parser](src/parser) using an IDE extension
-3. Run [Main](src/ui/Main.java)
+    - In IntelliJ, open the file pane and find `GameLexer.g4`, `GameParser.g4` in [`src/parser`](src/parser)
+3. Modify [`src/input.txt`](src/input.txt), following the grammar below
+3. Run [`src/ui/Main.java`](src/ui/Main.java)
 
 ## Playing our Game
 - Use the `↑` and `↓` to navigate the character
@@ -13,6 +16,74 @@
 - Enter portals to go into substages! If you die in a substage, you go back to the beginning of the level.
 - The goal is to finish all the levels
 
+## Example Input and Output
+![](assets/sample-output.mp4)
+
+```javascript
+create a game
+  called MyGame
+  of width 24
+  reward 50 every 1 units traveled
+
+create level 1
+  with speed 3
+  with walls 1, 2
+  with fireballs 1, 2, 3, 4
+  if hit (16,6)  go to substage 1
+  if hit (20,4) go to substage 2
+
+create level 2
+  with speed 4
+  with walls 2
+  if hit (10,0)   go to substage 1
+  if hit (16,6) go to substage 3
+
+create substage 1
+  with speed 5
+  with walls 1
+  with fireballs 1, 3
+  score * 2
+
+create substage 2
+  with speed 4
+  with walls 2
+  with fireballs 2
+  score + 500
+
+create substage 3
+  with speed 3
+  with walls 1, 2
+  with fireballs 2
+  score * 3
+
+create walls 1
+  of height 1 and width 1
+  at (23, 0)
+
+create walls 2
+  of height 1 and width 3
+  at (0, 0), (8, 2), (16, 8)
+
+create fireball 1
+  trigger every 1 units
+  at y=3
+  with speed 2
+
+create fireball 2
+  trigger at x=14
+  at y=3
+  with speed 3
+
+create fireball 3
+  trigger at x=18
+  at y=6
+  with speed 1
+
+create fireball 4
+  trigger every 1 units
+  at y=8
+  with speed 3
+```
 ## Grammar
 
 ```js
@@ -56,6 +127,12 @@ NUMBER: [0-9]+ ;
 OP: '+' | '-' | '*' | '/';
 ```
 
+
+## Notes about our Game
+- Coordinate system (origin is top left at (0,0), each game unit is 50 pixels)
+- Walls can overlap with each other and explain our reasoning: otherwise too restrictive on users and harder for them to debug conflicting walls
+
+
 ## User Study Summary
 We conducted the final user study as follows:
 
@@ -98,7 +175,6 @@ We conducted the final user study as follows:
 
 
 ### Notes from the first user study
-#### User's confusion
 - Users forget which walls they wrote and which they didn’t write
     - we decided to change the language design so that we can declare in-game objects and reuse them in declarations of stages
 - Users were having a hard time calculating coordinates in pixels
