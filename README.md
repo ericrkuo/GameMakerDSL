@@ -158,7 +158,7 @@ We conducted the final user study as follows:
 #### Final user study
 
 - [Desired Output](./SecondUserStudyExampleOutput.pdf)
-- [Desired Input](./SecondUserStudyExampleOutput.pdf)
+- [Desired Input](./SecondUserStudyExampleInput.md)
 
 #### First user study
 
