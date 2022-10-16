@@ -1,5 +1,8 @@
 # Project1Group12
 
+## Use case and motivation
+Our DSL is a game maker that combines some of our favourite childhood games like Mario, JetPack Joyrider, and Flappy Bird. The motivation behind our DSL was to reduce the learning curve of having to learn complex frameworks such as Unity and Blender, and instead, allow users to put their focus entirely on the layout of the game so that users with little to no programming experience to be able to create their own games by specifying the placement design of obstacles. 
+
 ## Running our project
 1. First, import all the required libraries for our project.
     - In IntelliJ Idea, navigate to `File > Project Structure > Libraries`
