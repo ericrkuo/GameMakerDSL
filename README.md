@@ -10,15 +10,16 @@
 3. Run [`src/ui/Main.java`](src/ui/Main.java)
 
 ## Playing our Game
-- Use the `↑` and `↓` to navigate the character
+- Use the `↑` and `↓` keys to navigate the character
 - Dodge fireballs and walls
 - Enter portals to go into substages! If you die in a substage, you go back to the beginning of the level.
 - The goal is to finish all the levels
+- Press 'R' to restart if you die, 'SPACE' to start the game, 'P' to pause the game
 
 ## Modifying Example Input
 Feel free to modify [`src/input.txt`](src/input.txt) by following the grammar below. 
 
-> NOTE: The coordinate system uses the concept of **game units**. Each game unit is 50 pixels. So since the height of our game is 500 pixels, the valid y-coordinates for walls and fireballs range from 0-9 game units.
+> NOTE: The coordinate system has origin (0,0) at the top left corner and uses the concept of **game units**. Each game unit is 50 pixels. So since the height of our game is 500 pixels, the valid y-coordinates for walls and fireballs range from 0-9 game units.
 
 > NOTE: Walls can overlap with each other. We decided not to make this a static check since we thought it would be too restrictive on users and would make it difficult for them to debug.
 
@@ -130,17 +131,11 @@ COMP: '>' | '<' | '=';
 TEXT: [a-zA-Z0-9]+;
 ```
 
-
-## Notes about our Game
-- Coordinate system (origin is top left at (0,0), each game unit is 50 pixels)
-- Walls can overlap with each other and explain our reasoning: otherwise too restrictive on users and harder for them to debug conflicting walls
-
-
 ## User Study Summary
 We conducted the final user study as follows:
 
 1. explain the grammar of our DSL
-2. show the user what a desired output (game) looks like
+2. show the user what the desired output (game) looks like
 3. ask them to recreate the desired output using our grammar
 4. compare the users code with our desired input (code that should generate the desired output)
 
