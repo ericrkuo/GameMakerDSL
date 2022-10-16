@@ -20,7 +20,7 @@ public class DynamicCheck {
     public final Pair<Integer, Integer> scoreRange = new Pair<>(0, 1000);
     public final Pair<Integer, Integer> wallHeightRange = new Pair<>(1, 10 ); // 1-based indexing -> 10 walls
     public final Pair<Integer, Integer> wallWidthRange = new Pair<>(1, Integer.MAX_VALUE);
-    public final Pair<Integer, Integer> triggerDistanceRange = new Pair<>(1, 10);
+    public final Pair<Integer, Integer> triggerDistanceRange = new Pair<>(0, 10);
     public Pair<Integer, Integer> coordinateXRange;
 
     public DynamicCheck(Program program) {

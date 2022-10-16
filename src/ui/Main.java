@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        GameLexer lexer = new GameLexer(CharStreams.fromFileName("src/input.txt"));
+        GameLexer lexer = new GameLexer(CharStreams.fromFileName("src/complex_input.txt"));
         for (Token token : lexer.getAllTokens()) {
             System.out.println(token);
         }
