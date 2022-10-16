@@ -188,6 +188,7 @@ We conducted the final user study as follows:
 - In the “create wall” statement, to split up height and width declaration
     - E.g. “with width 20 NEWLINE with height 100”
 
+More details [here](https://docs.google.com/document/d/1sPjLjNMnLESEZp0rIRhdijkrM3di5Ryl8ud1PNJVrLE/edit#bookmark=id.adboyl7tysbn)
 
 ### Notes from the first user study
 - Users forget which walls they wrote and which they didn’t write, and were having difficulty mapping obstacles to stages
@@ -197,6 +198,7 @@ We conducted the final user study as follows:
 - Users were having a hard time picturing how time flows in our Game 
     - we decided to instead use a distance based mechanism.
         - e.g. from `do every 2000 ms` to `do every 50 units` 
+- More details [here](https://docs.google.com/document/d/1sPjLjNMnLESEZp0rIRhdijkrM3di5Ryl8ud1PNJVrLE/edit#bookmark=id.2cg2rzbkqz3b)
 
 ## Past versions of our DSL
 Please see [`ExampleInput.md`](ExampleInput.md) for previous versions of our DSL.
