@@ -17,13 +17,15 @@
 - Press 'R' to restart if you die, 'SPACE' to start the game, 'P' to pause the game
 
 ## Modifying Example Input
-Feel free to modify [`src/input.txt`](src/input.txt) by following the grammar below. 
+Feel free to modify [`src/inputs/input.txt`](src/inputs/input.txt) by following the grammar below.
+
+You can also use any `.txt` file inside [`src/inputs`](src/inputs) by changing [`src/ui/Main.java`](src/ui/Main.java) to use the desired file.
 
 > NOTE: The coordinate system has origin (0,0) at the top left corner and uses the concept of **game units**. Each game unit is 50 pixels. So since the height of our game is 500 pixels, the valid y-coordinates for walls and fireballs range from 0-9 game units.
 
 > NOTE: Walls can overlap with each other. We decided not to make this a static check since we thought it would be too restrictive on users and would make it difficult for them to debug.
 
-Try out [`CheckList.md`](CheckList.md) to experiement with the static and dynamic checks we support. The error messages will appear in the console output.
+Try out [`CheckList.md`](CheckList.md) to experiment with the static and dynamic checks we support. The error messages will appear in the console output.
 
 
 ## Example Input and Output

@@ -15,7 +15,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         // can change to any .txt file inside src/inputs/*
-        GameLexer lexer = new GameLexer(CharStreams.fromFileName("src/inputs/complex_input.txt"));
+        GameLexer lexer = new GameLexer(CharStreams.fromFileName("src/inputs/input.txt"));
         for (Token token : lexer.getAllTokens()) {
             System.out.println(token);
         }
