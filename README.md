@@ -169,6 +169,7 @@ We conducted the final user study as follows:
 #### User's confusion
 - Game units vs pixel units 
     - E.g. Units of wall heights and widths (game units of 50px) vs the coordinate units (which are in pixels)
+    - We decided to fix this ASAP since we agreed it was confusing and it was a quick change to do.
 - Scoring system 
     - E.g. Whether the score multiplier in the substage applies to the current score, or the reward rate (reward 50 every 5 unites travelled)
 - Inconsistency of plurality 
@@ -189,12 +190,12 @@ We conducted the final user study as follows:
 
 
 ### Notes from the first user study
-- Users forget which walls they wrote and which they didn’t write
+- Users forget which walls they wrote and which they didn’t write, and were having difficulty mapping obstacles to stages
     - we decided to change the language design so that we can declare in-game objects and reuse them in declarations of stages
 - Users were having a hard time calculating coordinates in pixels
     - we decided to introduce game unit, which is equal to a side of a block
 - Users were having a hard time picturing how time flows in our Game 
-    - we decided to instead use a time based mechanism.
+    - we decided to instead use a distance based mechanism.
         - e.g. from `do every 2000 ms` to `do every 50 units` 
 
 ## Past versions of our DSL
