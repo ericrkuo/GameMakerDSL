@@ -131,6 +131,10 @@ COMP: '>' | '<' | '=';
 TEXT: [a-zA-Z0-9]+;
 ```
 
+## Documentation
+Please see our Google Doc for all the documentation and planning we did for our project.
+https://docs.google.com/document/d/1sPjLjNMnLESEZp0rIRhdijkrM3di5Ryl8ud1PNJVrLE/edit?usp=sharing
+
 ## User Study Summary
 We conducted the final user study as follows:
 
