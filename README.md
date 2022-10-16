@@ -194,6 +194,9 @@ We conducted the final user study as follows:
     - we decided to instead use a time based mechanism.
         - e.g. from `do every 2000 ms` to `do every 50 units` 
 
+## Past versions of our DSL
+Please see [`ExampleInput.md`](ExampleInput.md) for previous versions of our DSL.
+
 ## Future work
 - [ ] Preview/visualize layout of game
 - [ ] Allow ID’s to be names or support comments

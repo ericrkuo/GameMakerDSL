@@ -2,6 +2,8 @@
 
 
 ## Version 1
+- Basic game with support of obstacles
+- However, we found this version too complex, especially for our target audience of programmers with little to no programming experience
 ```js
 Game: Stage1
 
@@ -37,10 +39,8 @@ Def FireballEffect
 ```
 
 ## Version 2
-Main changes
-- Make the DSL simpler
-- Each obstacle can have a condition
-
+- Make the DSL even simpler and more intuitive to use
+- Each obstacle can have a condition for which stage(s) it applies to
 
 ```js
 create game
@@ -75,8 +75,9 @@ do every 2000 ms
 ```
 
 ## Version 3
-Main changes
-- Make the DSL even simpler
+- Further simplify the DSL by making the language simpler
+- Make stage declarations separate rather than a loop
+- Introduce nested stages, where each stage can have 0 or more child stages
 
 ```js
 create a game
@@ -118,9 +119,10 @@ do every 2000 ms
 ```
 
 ## Version 4
-Main changes
-- Polish definition of stages and levels (more similar to substages in mario)
+Applying feedback from user studies
+- Polish definition of stages and levels (more similar to substages in mario) by introducing concept of substages
 - Array-like declaration of walls
+- Wall declaration uses coordinate syntax, and now can have multiple coordinates per wall declaration
 
 ```js
 /**
@@ -193,8 +195,12 @@ do every 2000 ms
 ```
 
 ## Version 5
-Main changes
-- feedback from user studies
+Applying feedback from user studies
+- All the obstacles and objects now belong to a level
+- Same obstacles can be reused in multiple coordinates and levels
+- Support non-recurring fireball and move the loop INSIDE the declaration of the fireball
+
+> Note: Please see the results of our user studies for all that we changed and the feedback we got
 
 ```js
 /**
