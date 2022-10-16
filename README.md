@@ -131,6 +131,13 @@ COMP: '>' | '<' | '=';
 TEXT: [a-zA-Z0-9]+;
 ```
 
+## Code Structure
+- [`src/ast`](src/ast) contains all the files we used to build our AST
+- [`src/ui`](src/ui) contains all the files we used to build our UI
+- Collision Detector Visitor Pattern
+    - We used the visitor design pattern to implement our collision detection system
+    - Relevant classes include: [CollisionVisitor](https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/blob/main/src/ui/CollisionVisitor.java) and  [CollisionDetector](https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/blob/main/src/ui/CollisionDetector.java)
+
 ## Documentation
 Please see our Google Doc for all the documentation and planning we did for our project.
 https://docs.google.com/document/d/1sPjLjNMnLESEZp0rIRhdijkrM3di5Ryl8ud1PNJVrLE/edit?usp=sharing
