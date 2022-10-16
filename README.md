@@ -7,17 +7,27 @@
     - ![image](https://media.github.students.cs.ubc.ca/user/1272/files/b959a973-dfb7-4b20-8aa1-1e2f7f761aeb)
 2. Generate all ANTLR files inside [parser](src/parser) using an IDE extension
     - In IntelliJ, open the file pane and find `GameLexer.g4`, `GameParser.g4` in [`src/parser`](src/parser)
-3. Modify [`src/input.txt`](src/input.txt), following the grammar below
 3. Run [`src/ui/Main.java`](src/ui/Main.java)
 
 ## Playing our Game
-- Use the `↑` and `↓` to navigate the character
+- Use the `↑` and `↓` keys to navigate the character
 - Dodge fireballs and walls
 - Enter portals to go into substages! If you die in a substage, you go back to the beginning of the level.
 - The goal is to finish all the levels
+- Press 'R' to restart if you die, 'SPACE' to start the game, 'P' to pause the game
+
+## Modifying Example Input
+Feel free to modify [`src/input.txt`](src/input.txt) by following the grammar below. 
+
+> NOTE: The coordinate system has origin (0,0) at the top left corner and uses the concept of **game units**. Each game unit is 50 pixels. So since the height of our game is 500 pixels, the valid y-coordinates for walls and fireballs range from 0-9 game units.
+
+> NOTE: Walls can overlap with each other. We decided not to make this a static check since we thought it would be too restrictive on users and would make it difficult for them to debug.
+
+Try out [`CheckList.md`](CheckList.md) to experiement with the static and dynamic checks we support. The error messages will appear in the console output.
+
 
 ## Example Input and Output
-![](assets/sample-output.mp4)
+https://media.github.students.cs.ubc.ca/user/1272/files/ff924596-e288-46b8-a794-10260bb6fd86
 
 ```javascript
 create a game
@@ -87,57 +97,45 @@ create fireball 4
 ## Grammar
 
 ```js
-program : game (level)+ (substage)* (obstacle)* ;
-
+program : game (level)+ (substage)* (wall)* (fireball)* EOF ;
 game : 'create a game called' TEXT widthDimension reward ;
 
-// levels & substages
-level : 'create level' NUM speed? withWalls? withFireballs? (substageLocation)* ;
-substageLocation : 'if hit' coordinate 'go to substage' NUM ;
-substage : 'create substage' NUM speed? withWalls* withFireballs* score? ;
-withWalls: 'with walls' ids ;
-withFireballs: 'with fireballs' ids ;
-ids: (NUMBER (',' NUMBER)*) ;
+// game config
+dimension : 'of height' NUM 'and width' NUM;
+reward: 'reward' NUM 'every' NUM 'units traveled';
+speed: 'with speed' NUM;
+coordinate: '(' NUM ',' NUM ')';
+coordinates: (coordinate (',' coordinate)*);
+score: 'score' OP NUM;
+y_coordinate: 'at y=' NUM;
+
+// level & staging
+level: 'create level' NUM speed? withWalls? withFireballs? (substageLocation)*;
+substage: 'create substage' NUM speed? withWalls? withFireballs? score?;
+substageLocation : 'if hit' coordinate 'go to substage' NUM;
+withWalls: 'with walls' ids;
+withFireballs: 'with fireballs' ids;
+ids: (NUM (',' NUM)*);
 
 // obstacles
-obstacle : wall | fireball ;
-
-wall : 'create walls' NUMBER
-    dimension
-    'at' (coordinate (',' coordinate)*) ;
-
-fireball : 'create fireball' NUMBER trigger y_coordinate speed? ;
-trigger : loopTrigger | staticTrigger ;
-loopTrigger : 'trigger every ' NUMBER 'units' ;
-staticTrigger : 'trigger at x=' NUMBER ; 
-
-// obstacle/game configurations
-dimension : 'of height' NUMBER 'and width' NUMBER ;
-widthDimension : 'of width' NUMBER ;
-reward : 'reward' NUMBER 'every' NUMBER 'units traveled'
-score: 'score' OP NUM ;
-coordinate : '(' NUMBER ',' NUMBER ')';
-y_coordinate : 'at y=' NUMBER ;
-speed: 'with speed' NUMBER ;
+wall: 'create walls' NUM dimension 'at' coordinates;
+fireball: 'create fireball' NUM trigger y_coordinate speed?;
+trigger: loopTrigger | staticTrigger;
+loopTrigger: 'trigger every' NUM 'units';
+staticTrigger: 'trigger at x=' NUM;
 
 // other tokens
-COMPARATOR: '>' | '<' | '=' ;
-TEXT : [a-zA-Z0-9]+ ;
-NUMBER: [0-9]+ ;
+NUM: [0-9]+;
 OP: '+' | '-' | '*' | '/';
+COMP: '>' | '<' | '=';
+TEXT: [a-zA-Z0-9]+;
 ```
-
-
-## Notes about our Game
-- Coordinate system (origin is top left at (0,0), each game unit is 50 pixels)
-- Walls can overlap with each other and explain our reasoning: otherwise too restrictive on users and harder for them to debug conflicting walls
-
 
 ## User Study Summary
 We conducted the final user study as follows:
 
 1. explain the grammar of our DSL
-2. show the user what a desired output (game) looks like
+2. show the user what the desired output (game) looks like
 3. ask them to recreate the desired output using our grammar
 4. compare the users code with our desired input (code that should generate the desired output)
 
