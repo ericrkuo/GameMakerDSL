@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.misc.Pair;
 import java.util.HashSet;
 import java.util.Set;
 
+import static constants.Constant.FIREBALL_UNIT;
 import static constants.Constant.GAME_UNIT;
 
 public class DynamicCheck {
@@ -87,9 +88,9 @@ public class DynamicCheck {
             integerOverflow(fb.getSpeed().getValue(), speedRange, "speed for fireball " + fb.getId(), false);
             integerOverflow(fb.getY_coordinate(), coordinateYRange, String.format("y-coordinate fireball %d", fb.getId()), true);
             if (fb.getTrigger().getTriggerFlavour() == TriggerFlavour.Static) {
-                integerOverflow(fb.getCounter(), coordinateXRange, String.format("x-coordinate fireball %d", fb.getId()), true);
+                integerOverflow(fb.getTrigger().getValue() / FIREBALL_UNIT, coordinateXRange, String.format("x-coordinate fireball %d", fb.getId()), false);
             } else {
-                integerOverflow(fb.getCounter(), triggerDistanceRange, String.format("Trigger distance of fireball %d", fb.getId()), true);
+                integerOverflow(fb.getTrigger().getValue() / FIREBALL_UNIT, triggerDistanceRange, String.format("Trigger distance of fireball %d", fb.getId()), false);
             }
         }
 
