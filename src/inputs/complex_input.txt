@@ -144,21 +144,21 @@ create fireball 8
   with speed 10
 
 create fireball 9
-  trigger every 0 units
+  trigger every 1 units
   at y=0
   with speed 4
 
 create fireball 10
-  trigger every 0 units
+  trigger every 1 units
   at y=3
   with speed 4
 
 create fireball 11
-  trigger every 0 units
+  trigger every 1 units
   at y=6
   with speed 4
 
 create fireball 12
-  trigger every 0 units
+  trigger every 1 units
   at y=9
   with speed 4
