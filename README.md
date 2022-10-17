@@ -166,6 +166,8 @@ We conducted the final user study as follows:
 - [Desired Input](./FirstUserStudyExampleInput.md)
 
 ### Notes from the final user study
+Overall, users were quite happy with our end to end design, and expressed that it was easy and fun to learn the language. There were some minor feedbacks about the grammar, mainly wording and some conceptual misunderstanding about the coordinate system, so we took the time to quickly patch that up! We also identified some parts of our project that can be improved for the future
+
 #### User's confusion
 - Game units vs pixel units 
     - E.g. Units of wall heights and widths (game units of 50px) vs the coordinate units (which are in pixels)
@@ -181,9 +183,11 @@ We conducted the final user study as follows:
 #### User's suggestions
 - A way for the user to preview/visualize what their layout looks like
     - E.g. The user may want to see what level 10 looks like without having to reach that level
+    - This'll help with the efficiency of our language since users will be able to more rapidly prototype and construct their game.
 - Removing redundant words such as “travelled” from “every 50 units travelled”
 - String name for objects rather than restricting to integer
-    - E.g. create wall myWallForLevel1
+    - E.g. create wall Top3By4Wall
+    - This'll help reduce error proneness and improve learnability since names are more intuitive than ID's, and users will be able to better remember the purpose of certain walls since they can use names to describe them
 - Add the ability to add comments
 - In the “create wall” statement, to split up height and width declaration
     - E.g. “with width 20 NEWLINE with height 100”
@@ -191,8 +195,11 @@ We conducted the final user study as follows:
 More details [here](https://docs.google.com/document/d/1sPjLjNMnLESEZp0rIRhdijkrM3di5Ryl8ud1PNJVrLE/edit#bookmark=id.adboyl7tysbn)
 
 ### Notes from the first user study
+Overall, we found users struggling to grasp some concepts relating to our walls and stages. We found that our language was error-prone, inefficient, and had aspects of it that could be improved to help make it easier to learn. We got some really good feedback from them, and discussed amongst ourselves how we could reiterate on certain aspeects of our DSL. 
+
 - Users forget which walls they wrote and which they didn’t write, and were having difficulty mapping obstacles to stages
     - we decided to change the language design so that we can declare in-game objects and reuse them in declarations of stages
+    - this was violating the error proneness language principle, since users were forgetting which walls they already created and also made if inefficient since it took a longer time to write the input.
 - Users were having a hard time calculating coordinates in pixels
     - we decided to introduce game unit, which is equal to a side of a block
 - Users were having a hard time picturing how time flows in our Game 
