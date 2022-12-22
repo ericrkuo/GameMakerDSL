@@ -1,4 +1,6 @@
-# Project1Group12
+# Game Maker DSL
+
+![GameUPDATED](https://user-images.githubusercontent.com/49849754/209035730-2cacc6de-eeb5-4814-b659-d05a56e0fc3f.gif)
 
 ## Use case and motivation
 Our DSL is a game maker that combines some of our favourite childhood games like Mario, JetPack Joyrider, and Flappy Bird. The motivation behind our DSL was to reduce the learning curve of having to learn complex frameworks such as Unity and Blender, and instead, allow users to put their focus entirely on the layout of the game so that users with little to no programming experience to be able to create their own games by specifying the placement design of obstacles. 
@@ -30,9 +32,7 @@ You can also use any `.txt` file inside [`src/inputs`](src/inputs) by changing [
 
 Try out [`CheckList.md`](CheckList.md) to experiment with the static and dynamic checks we support. The error messages will appear in the console output.
 
-
 ## Example Input and Output
-https://media.github.students.cs.ubc.ca/user/1272/files/ff924596-e288-46b8-a794-10260bb6fd86
 
 ```javascript
 create a game
@@ -142,70 +142,6 @@ TEXT: [a-zA-Z0-9]+;
 - Collision Detector Visitor Pattern
     - We used the visitor design pattern to implement our collision detection system
     - Relevant classes include: [CollisionVisitor](https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/blob/main/src/ui/CollisionVisitor.java) and  [CollisionDetector](https://github.students.cs.ubc.ca/CPSC410-2022W-T1/Project1Group12/blob/main/src/ui/CollisionDetector.java)
-
-## Documentation
-Please see our Google Doc for all the documentation and planning we did for our project.
-https://docs.google.com/document/d/1sPjLjNMnLESEZp0rIRhdijkrM3di5Ryl8ud1PNJVrLE/edit?usp=sharing
-
-## User Study Summary
-We conducted the final user study as follows:
-
-1. explain the grammar of our DSL
-2. show the user what the desired output (game) looks like
-3. ask them to recreate the desired output using our grammar
-4. compare the users code with our desired input (code that should generate the desired output)
-
-#### Final user study
-
-- [Desired Output](./SecondUserStudyExampleOutput.pdf)
-- [Desired Input](./SecondUserStudyExampleInput.md)
-
-#### First user study
-
-- [Desired Output](./FirstUserStudyExampleOutput.pdf)
-- [Desired Input](./FirstUserStudyExampleInput.md)
-
-### Notes from the final user study
-Overall, users were quite happy with our end to end design, and expressed that it was easy and fun to learn the language. There were some minor feedbacks about the grammar, mainly wording and some conceptual misunderstanding about the coordinate system, so we took the time to quickly patch that up! We also identified some parts of our project that can be improved for the future
-
-#### User's confusion
-- Game units vs pixel units 
-    - E.g. Units of wall heights and widths (game units of 50px) vs the coordinate units (which are in pixels)
-    - We decided to fix this ASAP since we agreed it was confusing and it was a quick change to do.
-- Scoring system 
-    - E.g. Whether the score multiplier in the substage applies to the current score, or the reward rate (reward 50 every 5 unites travelled)
-- Inconsistency of plurality 
-    - E.g. “with fireballs” vs “create fireball”
-- Ordering of statements
-    - E.g. First declare levels, substages, walls, then fireballs. Our parser enforces this order
-    - E.g. Within level/substage declaration, first speed, then walls, fireballs, then either substage location or score depending on if level or substage.
-
-#### User's suggestions
-- A way for the user to preview/visualize what their layout looks like
-    - E.g. The user may want to see what level 10 looks like without having to reach that level
-    - This'll help with the efficiency of our language since users will be able to more rapidly prototype and construct their game.
-- Removing redundant words such as “travelled” from “every 50 units travelled”
-- String name for objects rather than restricting to integer
-    - E.g. create wall Top3By4Wall
-    - This'll help reduce error proneness and improve learnability since names are more intuitive than ID's, and users will be able to better remember the purpose of certain walls since they can use names to describe them
-- Add the ability to add comments
-- In the “create wall” statement, to split up height and width declaration
-    - E.g. “with width 20 NEWLINE with height 100”
-
-More details [here](https://docs.google.com/document/d/1sPjLjNMnLESEZp0rIRhdijkrM3di5Ryl8ud1PNJVrLE/edit#bookmark=id.adboyl7tysbn)
-
-### Notes from the first user study
-Overall, we found users struggling to grasp some concepts relating to our walls and stages. We found that our language was error-prone, inefficient, and had aspects of it that could be improved to help make it easier to learn. We got some really good feedback from them, and discussed amongst ourselves how we could reiterate on certain aspeects of our DSL. 
-
-- Users forget which walls they wrote and which they didn’t write, and were having difficulty mapping obstacles to stages
-    - we decided to change the language design so that we can declare in-game objects and reuse them in declarations of stages
-    - this was violating the error proneness language principle, since users were forgetting which walls they already created and also made if inefficient since it took a longer time to write the input.
-- Users were having a hard time calculating coordinates in pixels
-    - we decided to introduce game unit, which is equal to a side of a block
-- Users were having a hard time picturing how time flows in our Game 
-    - we decided to instead use a distance based mechanism.
-        - e.g. from `do every 2000 ms` to `do every 50 units` 
-- More details [here](https://docs.google.com/document/d/1sPjLjNMnLESEZp0rIRhdijkrM3di5Ryl8ud1PNJVrLE/edit#bookmark=id.2cg2rzbkqz3b)
 
 ## Past versions of our DSL
 Please see [`ExampleInput.md`](ExampleInput.md) for previous versions of our DSL.
